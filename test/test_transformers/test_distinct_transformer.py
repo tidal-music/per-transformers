@@ -1,0 +1,18 @@
+import utils.constants as c
+from transformers.distinct_transformer import DistinctTransformer
+from pyspark_test import PySparkTest
+
+
+class DistinctTransformerTest(PySparkTest):
+
+    def test_transform(self):
+        dataset = self.sc.createDataFrame([
+            (1, c.NAME, "a"),
+            (1, c.NAME, "a"),
+            (1, c.NAME, "c"),
+        ], [c.ARTIFACT_ID, c.TYPE, c.VALUE])
+
+        output = (DistinctTransformer()
+                  .transform(dataset))
+
+        self.assertEqual(2, output.count())
