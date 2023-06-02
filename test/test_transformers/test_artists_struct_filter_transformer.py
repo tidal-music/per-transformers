@@ -8,7 +8,7 @@ import pyspark.sql.types as T
 class TestArtistsStructFilterTransformer(PySparkTest):
 
     def setUp(self):
-        self.artist_category_filters = self.sc.createDataFrame([
+        self.artist_category_filters = self.spark.createDataFrame([
             (65, "The Clash", True, 100_000, 30_000, 0, 0, 0, 0),
             (222, "The Greatful Dead", True, 130_000, 48_000, 0, 0, 0, 0),
             (23406735, "Kassa Young", True, 200, 21, 0, 0, 0, 0),
@@ -27,7 +27,7 @@ class TestArtistsStructFilterTransformer(PySparkTest):
              c.HOLIDAY,
              c.NON_MUSIC])
 
-        self.artists = self.sc.createDataFrame([
+        self.artists = self.spark.createDataFrame([
             ("abc", [{"aliases": [], "picture": "", "id": 65, "name": "The Clash", "main": True}]),
             ("abd", [{"aliases": [], "picture": "", "id": 222, "name": "The Greatful Dead", "main": True}]),
             ("abe", [

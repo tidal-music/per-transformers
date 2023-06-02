@@ -7,7 +7,7 @@ from pyspark_test import PySparkTest
 class ReplaceNullValuesTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, c.NAME, "a"),
             (2, None, "a"),
             (3, c.NAME, None),

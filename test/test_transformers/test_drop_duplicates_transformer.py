@@ -8,7 +8,7 @@ import utils.constants as c
 class DropDuplicatesTransformerTest(PySparkTest):
 
     def test_transform(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, "a", 1),
             (1, "a", 2),
             (2, "b", 1),

@@ -6,7 +6,7 @@ from pyspark_test import PySparkTest
 class BlazingTextInputFormatTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, ["a", "b", "c"]),
             (2, ["a", "c", "d", "e"]),
             (3, ["a", "b", "c", "f", "g"]),

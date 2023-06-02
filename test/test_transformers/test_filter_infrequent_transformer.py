@@ -6,7 +6,7 @@ import utils.constants as c
 class FilterInfrequentTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, "SONGWRITER", 10),
             (1, "SONGWRITER", 11),
             (1, "SONGWRITER", 12),

@@ -9,7 +9,7 @@ class ParticipatingArtistsTransformerTest(PySparkTest):
 
     def test_transform(self):
 
-        artists = self.sc.createDataFrame([
+        artists = self.spark.createDataFrame([
             (1, [Row(name='John', age=30, main='true'), Row(name='Mary', age=50, main='false')]),
             (2, [Row(name='Mike', age=20, main='true'), Row(name='Julie', age=60, main='true')]),
         ], [c.ID, c.ARTISTS])

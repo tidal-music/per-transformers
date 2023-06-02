@@ -9,7 +9,7 @@ import utils.constants as c
 class WithColumnRenamedTransformerTest(PySparkTest):
 
     def test_transform(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, "a"),
             (2, "b"),
         ], [c.ID, c.NAME])

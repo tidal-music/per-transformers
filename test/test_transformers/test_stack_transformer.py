@@ -7,7 +7,7 @@ import utils.constants as c
 class StackTransformerTest(PySparkTest):
 
     def test_transform(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 'a', 1, 20, 20),
             (1, 'b', 2, 15, 20),
             (1, 'a', 3, 30, 20),

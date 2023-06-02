@@ -8,7 +8,7 @@ from pyspark_test import PySparkTest
 class MinMaxScalingTransformerTest(PySparkTest):
 
     def test_transform_target_range_0_1(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 2),
             (2, 5)
         ], [c.ITEM, c.SCORE])
@@ -17,7 +17,7 @@ class MinMaxScalingTransformerTest(PySparkTest):
         assert res.where(F.col(c.ITEM) == 2).select(c.SCORE).collect()[0][0] == 1
 
     def test_transform_target_range_1_5(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 2),
             (2, 5)
         ], [c.ITEM, c.SCORE])
@@ -26,7 +26,7 @@ class MinMaxScalingTransformerTest(PySparkTest):
         assert res.where(F.col(c.ITEM) == 2).select(c.SCORE).collect()[0][0] == 5
 
     def test_transform_none_input_score_range(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 2),
             (2, 5)
         ], [c.ITEM, c.SCORE])
@@ -35,7 +35,7 @@ class MinMaxScalingTransformerTest(PySparkTest):
         assert res.where(F.col(c.ITEM) == 2).select(c.SCORE).collect()[0][0] == 5
 
     def test_transform_no_rounding(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (0, 0, 1.0),
             (0, 0, 2.0),
             (0, 0, 3.0),

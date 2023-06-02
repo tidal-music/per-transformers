@@ -7,7 +7,7 @@ import utils.constants as c
 class TopItemsDitheringTransformerTest(PySparkTest):
 
     def test_top_items_transformer(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 1, 10),
             (1, 2, 8),
             (1, 3, 6),

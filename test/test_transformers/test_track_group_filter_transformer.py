@@ -8,7 +8,7 @@ from pyspark_test import PySparkTest
 class TrackGroupFilterTransformerTest(PySparkTest):
 
     def test_transform(self):
-        track_groups = self.sc.createDataFrame([
+        track_groups = self.spark.createDataFrame([
             ("a",),
             ("b",),
             ("c",),
@@ -57,7 +57,7 @@ class TrackGroupFilterTransformerTest(PySparkTest):
         self.assertEqual(0, res_no_filters.where(F.col(c.TRACK_GROUP) == "h").count())
 
     def get_track_group_content_filter_table(self):
-        return self.sc.createDataFrame([
+        return self.spark.createDataFrame([
             ("a", True, 300, 10_000, 5_000, 0, 0, 0, 0),
             ("b", True, 300, 100, 20, 0, 0, 0, 0),  # low stream counts
             ("c", True, 6000, 10_000, 5_000, 0, 0, 0, 0),  # high duration

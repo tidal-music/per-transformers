@@ -6,7 +6,7 @@ from pyspark_test import PySparkTest
 class DistinctTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, c.NAME, "a"),
             (1, c.NAME, "a"),
             (1, c.NAME, "c"),

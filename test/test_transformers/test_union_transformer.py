@@ -7,12 +7,12 @@ import utils.constants as c
 class UnionTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dependent = self.sc.createDataFrame([
+        dependent = self.spark.createDataFrame([
             (3, [10, 12, 14]),
             (4, [14, 12, 17]),
         ], [c.PLAYLIST_ID, c.TRACKS])
 
-        independent = self.sc.createDataFrame([
+        independent = self.spark.createDataFrame([
             (1, [10, 11, 12]),
             (2, [10, 13, 16])
         ], [c.PLAYLIST_ID, c.TRACKS])
@@ -21,12 +21,12 @@ class UnionTransformerTest(PySparkTest):
         self.assertEqual(4, res.select(c.PLAYLIST_ID).distinct().count())
 
         # check the order of columns is aligned if they're not in the same order
-        dependent1 = self.sc.createDataFrame([
+        dependent1 = self.spark.createDataFrame([
             (3, 10),
             (4, 11),
         ], [c.PLAYLIST_ID, c.TRACKS])
 
-        independent1 = self.sc.createDataFrame([
+        independent1 = self.spark.createDataFrame([
             (12, 1),
             (13, 2)
         ], [c.TRACKS, c.PLAYLIST_ID])

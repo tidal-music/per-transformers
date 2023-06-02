@@ -7,7 +7,7 @@ import utils.constants as c
 class AggregateTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, 10, 1),
             (1, 11, 2),
             (2, 12, 3),

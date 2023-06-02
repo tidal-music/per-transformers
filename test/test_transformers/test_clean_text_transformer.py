@@ -7,7 +7,7 @@ from pyspark_test import PySparkTest
 class CleanTextTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, "Title a"),  # 1
             (2, "title a"),
             (2, "title    a"),

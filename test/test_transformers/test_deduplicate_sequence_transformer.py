@@ -16,7 +16,7 @@ class DuplicatePlaylistTracksTransformerTest(PySparkTest):
             T.StructField(c.ID, T.IntegerType()),
             T.StructField(c.TRACKS, array_schema)])
 
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (0, [{"artistId": 1, "trackGroup": 1002},
                  {"artistId": 3, "trackGroup": 1002},
                  {"artistId": 4, "trackGroup": 1003},

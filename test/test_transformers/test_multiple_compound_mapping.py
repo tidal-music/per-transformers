@@ -7,7 +7,7 @@ import utils.constants as c
 class MultipleCompoundTransformerTest(PySparkTest):
 
     def test_transform(self):
-        mapping_table = self.sc.createDataFrame([
+        mapping_table = self.spark.createDataFrame([
             (10, 100, True, 0),
             (10, 101, True, 0),
             (10, 102, False, 0),
@@ -15,7 +15,7 @@ class MultipleCompoundTransformerTest(PySparkTest):
             (11, 104, True, 1)
         ], [c.ARTIST_ID, c.ARTIST_COMPOUND_ID, c.MAIN_ARTIST, c.PRIORITY])
 
-        playback_log = self.sc.createDataFrame([
+        playback_log = self.spark.createDataFrame([
             (1, 10, 1),
             (1, 11, 1),
             (1, 12, 1),

@@ -8,12 +8,12 @@ from pyspark_test import PySparkTest
 class BroadcastArrayIntersectTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, [1, 2, 3, 4, 5]),
             (2, [7, 6, 3, 2])
         ], [c.ID, c.ITEMS])
 
-        items_to_keep = self.sc.createDataFrame([
+        items_to_keep = self.spark.createDataFrame([
             (1, ),
             (2, ),
             (3, ),

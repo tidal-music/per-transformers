@@ -8,7 +8,7 @@ import pyspark.sql.functions as F
 class WhereTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, True),
             (2, False),
             (3, True)

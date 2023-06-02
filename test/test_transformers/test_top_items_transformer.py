@@ -6,7 +6,7 @@ import pyspark.sql.functions as F
 class TransformerTest(PySparkTest):
 
     def test_top_items_transformer(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, 2, 1),  # 2 neighbours from artist 2
             (1, 2, 2),
             (1, 3, 3),  # 2 neighbours from artist 3

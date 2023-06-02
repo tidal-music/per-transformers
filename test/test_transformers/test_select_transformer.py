@@ -8,7 +8,7 @@ import pyspark.sql.functions as F
 class SelectTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, [10, 11, 12], 100),
             (1, [10, 11, 12], 100),
         ], [c.PLAYLIST_ID, c.TRACKS, c.USER_ID])

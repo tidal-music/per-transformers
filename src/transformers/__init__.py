@@ -14,7 +14,6 @@ from .filter_infrequent_seq_transformer import FilterInfrequentSeqItemsTransform
 from .filter_infrequent_transformer import FilterInfrequentTransformer
 from .flatten_struct_transformer import FlattenStructTransformer
 from .join_transformer import JoinTransformer
-from .main_artist_from_artists_transformer import MainArtistFromArtistsTransformer
 from .minmax_scaling_transformer import MinMaxScalingTransformer
 from .order_by_transformer import OrderByTransformer
 from .participating_artist_transformer import ParticipatingArtistsTransformer

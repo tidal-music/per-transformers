@@ -6,7 +6,7 @@ from pyspark_test import PySparkTest
 class VoicenessFilterTransformerTest(PySparkTest):
 
     def test_transform(self):
-        voiceness_scores = self.sc.createDataFrame([
+        voiceness_scores = self.spark.createDataFrame([
             (1, 0.03, 0),
             (2, 0.33, 0),
             (3, 0.53, 1),
@@ -14,7 +14,7 @@ class VoicenessFilterTransformerTest(PySparkTest):
             (5, 0.99, 1),
         ], [c.PRODUCT_ID, c.SCORE, c.VOICE])
 
-        track_index = self.sc.createDataFrame([
+        track_index = self.spark.createDataFrame([
             (1, 11),
             (2, 12),
             (3, 13),
@@ -22,7 +22,7 @@ class VoicenessFilterTransformerTest(PySparkTest):
             (5, 15),
         ], [c.ID, c.TRACK_GROUP])
 
-        tracks = self.sc.createDataFrame([
+        tracks = self.spark.createDataFrame([
             (11,),
             (12,),
             (13,),
@@ -37,7 +37,7 @@ class VoicenessFilterTransformerTest(PySparkTest):
         self.assertEqual(3, res.count())
 
     def test_transform_custom_threshold(self):
-        voiceness_scores = self.sc.createDataFrame([
+        voiceness_scores = self.spark.createDataFrame([
             (1, 0.03, 0),
             (2, 0.33, 0),
             (3, 0.53, 1),
@@ -45,7 +45,7 @@ class VoicenessFilterTransformerTest(PySparkTest):
             (5, 0.99, 1),
         ], [c.PRODUCT_ID, c.SCORE, c.VOICE])
 
-        track_index = self.sc.createDataFrame([
+        track_index = self.spark.createDataFrame([
             (1, 11),
             (2, 12),
             (3, 13),
@@ -53,7 +53,7 @@ class VoicenessFilterTransformerTest(PySparkTest):
             (5, 15),
         ], [c.ID, c.TRACK_GROUP])
 
-        tracks = self.sc.createDataFrame([
+        tracks = self.spark.createDataFrame([
             (11,),
             (12,),
             (13,),

@@ -7,7 +7,7 @@ import pyspark.sql.types as T
 class DistinctSequenceTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (0, [1, 2, 3, 4, 5]),
             (1, [2, 1, 3, 4, 5]),
             (2, [3, 1, 2, 4, 5])
@@ -25,7 +25,7 @@ class DistinctSequenceTransformerTest(PySparkTest):
                 T.StructField(c.ARTIST_ID, T.IntegerType()),
                 T.StructField(c.TRACK_GROUP, T.IntegerType())])))])
 
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (0, [{"artistId": 1, "trackGroup": 1002},
                  {"artistId": 3, "trackGroup": 1002},
                  {"artistId": 4, "trackGroup": 1003},

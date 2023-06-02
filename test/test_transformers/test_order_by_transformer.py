@@ -10,7 +10,7 @@ import pyspark.sql.functions as F
 class OrderByTransformerTest(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1, 2),
             (2, 3),
             (2, 4),

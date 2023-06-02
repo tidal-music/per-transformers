@@ -6,7 +6,7 @@ import utils.constants as c
 class TestSingleArtistFilterTransformer(PySparkTest):
 
     def setUp(self):
-        self.artist_category_filters = self.sc.createDataFrame([
+        self.artist_category_filters = self.spark.createDataFrame([
             (65, "The Clash", True, 100_000, 30_000, 0, 0, 0, 0),
             (222, "The Greatful Dead", True, 130_000, 48_000, 0, 0, 0, 0),
             (23406735, "Kassa Young", True, 200, 21, 0, 0, 0, 0),
@@ -26,7 +26,7 @@ class TestSingleArtistFilterTransformer(PySparkTest):
              c.NON_MUSIC])
 
     def test_transform_artist_id(self):
-        artists = self.sc.createDataFrame([
+        artists = self.spark.createDataFrame([
             (65,),
             (222,),
             (23406735,),

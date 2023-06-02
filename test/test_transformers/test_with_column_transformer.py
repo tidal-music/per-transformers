@@ -9,7 +9,7 @@ import pyspark.sql.functions as F
 class WithColumnTransformerTest(PySparkTest):
 
     def test_transform(self):
-        df = self.sc.createDataFrame([
+        df = self.spark.createDataFrame([
             (1, "a"),
             (2, "b"),
         ], [c.ID, c.NAME])

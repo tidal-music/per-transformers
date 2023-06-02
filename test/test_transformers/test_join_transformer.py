@@ -8,11 +8,11 @@ import utils.constants as c
 class JoinTransformerTest(PySparkTest):
 
     def test_transform(self):
-        right = self.sc.createDataFrame([
+        right = self.spark.createDataFrame([
             (1, "a"),
             (2, "b"),
         ], [c.ID, c.NAME])
-        left = self.sc.createDataFrame([
+        left = self.spark.createDataFrame([
             (1, "y"),
             (2, "z"),
         ], [c.ID, c.TITLE])

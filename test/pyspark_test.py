@@ -25,4 +25,4 @@ class PySparkTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.suppress_py4j_logging()
-        cls.sc = cls.create_testing_pyspark_session()
+        cls.spark = cls.create_testing_pyspark_session()

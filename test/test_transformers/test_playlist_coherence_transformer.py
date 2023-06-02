@@ -7,12 +7,12 @@ import utils.constants as c
 class TestPlaylistCoherenceTransformer(PySparkTest):
 
     def test_transform(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (1,  100),
             (2, 200),
         ], [c.PLAYLIST_ID, c.USER_ID])
 
-        playlist_coherence = self.sc.createDataFrame([
+        playlist_coherence = self.spark.createDataFrame([
             (1, 0.95),
             (2, 0.55),
         ], [c.PLAYLIST_ID, c.SCORE])

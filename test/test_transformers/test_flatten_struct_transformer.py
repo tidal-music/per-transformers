@@ -9,7 +9,7 @@ class FlattenStructTransformerTest(PySparkTest):
 
     def test_transform(self):
 
-        artists = self.sc.createDataFrame([
+        artists = self.spark.createDataFrame([
             (1, [Row(name='John', age=30), Row(name='Mary', age=50)]),
             (2, [Row(name='Mike', age=20), Row(name='Julie', age=60)]),
         ], [c.ID, c.ARTISTS])
