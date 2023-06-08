@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.8.16'
 
     - name: Check out code
       uses: actions/checkout@v2
@@ -24,8 +24,11 @@ jobs:
     - name: Upgrade pip
       run: python -m pip install --upgrade pip
 
+    - name: Install poetry
+      run: pip install poetry==1.5.1
+
     - name: Install dependencies
-      run: pip install -r requirements.txt -r requirements-test.txt
+      run: poetry install --no-root
 
     - name: Run unit tests
-      run: PYTHONPATH=src pytest test/
+      run: PYTHONPATH=src poetry run pytest test/

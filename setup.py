@@ -17,7 +17,7 @@ with open('README.md', 'r') as fh:
 setup(
     name='transformer',
     version=VERSION,
-    description='common transformers used by the tidal personlization team.',
+    description='common transformers used by the tidal personalization team.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/tidal-open-source/per-transformers',

@@ -1,9 +1,0 @@
-pyspark==3.3.0
-numpy>=1.16.4
-s3fs==2022.11.0
-boto3==1.24.59
-pandas>=1.4.2
-great-expectations==0.15.32
-scikit-learn==1.1.1
-alphabet-detector==0.0.7
-pyarrow==7.0.0

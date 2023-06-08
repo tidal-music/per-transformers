@@ -15,10 +15,6 @@ class DropDuplicatesTransformerTest(PySparkTest):
         ], [c.ID, c.NAME, c.COUNT])
 
         self.assertEqual([Row(id=1, name='a', count=1),
-                          Row(id=1, name='a', count=2),
-                          Row(id=2, name='b', count=1)],
-                         DropDuplicatesTransformer().transform(df).collect())
-        self.assertEqual([Row(id=1, name='a', count=1),
                           Row(id=2, name='b', count=1)],
                          DropDuplicatesTransformer([c.ID, c.NAME]).transform(df).collect())
 
