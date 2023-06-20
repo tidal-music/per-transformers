@@ -1,7 +1,7 @@
 from transformers.union_transformer import UnionTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class UnionTransformerTest(PySparkTest):

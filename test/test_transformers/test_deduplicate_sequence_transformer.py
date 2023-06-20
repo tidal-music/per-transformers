@@ -1,6 +1,6 @@
 from transformers import DuplicateSequenceTransformer
 import pyspark.sql.functions as F
-import utils.constants as c
+import transformers.utils.constants as c
 from pyspark_test import PySparkTest
 import pyspark.sql.types as T
 

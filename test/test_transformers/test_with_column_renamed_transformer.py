@@ -3,7 +3,7 @@ from pyspark.sql.types import StructType, StructField, LongType, StringType, Row
 from transformers.with_column_renamed_transfomer import WithColumnRenamedTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class WithColumnRenamedTransformerTest(PySparkTest):

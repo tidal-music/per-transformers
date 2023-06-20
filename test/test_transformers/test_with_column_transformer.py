@@ -2,7 +2,7 @@ from pyspark.sql.types import StructType, StructField, LongType, StringType, Row
 from transformers.with_column_transfomer import WithColumnTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import transformers.utils.constants as c
 import pyspark.sql.functions as F
 
 

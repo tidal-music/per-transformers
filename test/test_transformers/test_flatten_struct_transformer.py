@@ -2,7 +2,7 @@ from pyspark.sql.types import StructType, StructField, LongType, StringType, Row
 
 from transformers.flatten_struct_transformer import FlattenStructTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class FlattenStructTransformerTest(PySparkTest):

@@ -1,4 +1,4 @@
-import utils.constants as c
+import transformers.utils.constants as c
 from transformers.clean_text_transformer import CleanTextTransformer
 
 from pyspark_test import PySparkTest

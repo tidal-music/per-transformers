@@ -1,6 +1,6 @@
 from transformers import DistinctSequenceTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 import pyspark.sql.types as T
 
 

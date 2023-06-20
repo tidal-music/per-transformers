@@ -4,7 +4,7 @@ import pyspark.sql.functions as F
 from transformers.loggable_transformer import LoggableTransformer
 from pyspark.sql.types import DataType
 
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class FilterInfrequentSeqItemsTransformer(LoggableTransformer):

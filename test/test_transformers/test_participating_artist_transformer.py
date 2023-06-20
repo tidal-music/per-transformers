@@ -2,7 +2,7 @@ from pyspark.sql.types import StructType, StructField, LongType, StringType, Row
 
 from transformers.participating_artist_transformer import ParticipatingArtistsTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class ParticipatingArtistsTransformerTest(PySparkTest):

@@ -1,7 +1,7 @@
 from transformers.artists_struct_filter_transformer import ArtistsStructFilterTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
-from utils.schemas import ARTISTS_SCHEMA
+import transformers.utils.constants as c
+from transformers.utils import ARTISTS_SCHEMA
 import pyspark.sql.types as T
 
 

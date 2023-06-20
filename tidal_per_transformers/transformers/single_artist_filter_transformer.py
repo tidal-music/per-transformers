@@ -1,21 +1,19 @@
-import pyspark.sql.functions as F
-import pyspark.sql.types as T
 from pyspark.sql.dataframe import DataFrame
 
-import utils.constants as c
+import transformers.utils.constants as c
 from transformers import ArtistFilterTransformer
 
 
-class ArtistsStructFilterTransformer(ArtistFilterTransformer):
+class SingleArtistFilterTransformer(ArtistFilterTransformer):
     """
-    :param artist_filters:          DataFrame containing the content filter information
-    :param remove_ambient_music:    flag for toggling ambient music on/off
-    :param remove_holiday_music:    flag for toggling holiday music on/off
-    :param remove_children_music:   flag for toggling children music on/off
-    :param min_artist_streams:      minimum number of streams for an artist to be included
-    :param min_artist_streamers:    minimum number of unique listeners for an artist to be included
-    :param artist_column:           Column containing artists
-    """
+        :param artist_filters:          DataFrame containing the content filter information
+        :param remove_ambient_music:    flag for toggling ambient music on/off
+        :param remove_holiday_music:    flag for toggling holiday music on/off
+        :param remove_children_music:   flag for toggling children music on/off
+        :param min_artist_streams:      minimum number of streams for an artist to be included
+        :param min_artist_streamers:    minimum number of unique listeners for an artist to be included
+        :param artist_column:           Column containing artists
+        """
 
     def __init__(self,
                  artist_filters: DataFrame,
@@ -24,7 +22,7 @@ class ArtistsStructFilterTransformer(ArtistFilterTransformer):
                  remove_holiday_music: bool,
                  min_artist_streamers: int = 500,
                  min_artist_streams: int = 2000,
-                 artist_column: str = c.ARTISTS
+                 artist_column: str = c.ARTIST_ID
                  ):
         super().__init__(artist_filters,
                          remove_children_music,
@@ -47,14 +45,7 @@ class ArtistsStructFilterTransformer(ArtistFilterTransformer):
                                              self.remove_holiday_music,
                                              self.remove_ambient_music,
                                              self.remove_children_music)
-        artists_set = set(cleaned_artists.toPandas()[c.ARTIST_ID].tolist())
-        artists_set_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(artists_set)
-
-        @F.udf(returnType=T.ArrayType(T.IntegerType()))
-        def filter_artists(main_artists):
-            return [artist[c.ID] for artist in main_artists if artist[c.ID] in artists_set_bc.value]
-
         return (dataset
-                .withColumn(c.MATCHES, filter_artists(self.artist_column))
-                .where(F.size(c.MATCHES) > 0)
-                .drop(c.MATCHES))
+                .join(cleaned_artists.withColumnRenamed(c.ARTIST_ID, self.artist_column),
+                      self.artist_column,
+                      how="inner"))

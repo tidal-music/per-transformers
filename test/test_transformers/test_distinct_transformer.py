@@ -1,4 +1,4 @@
-import utils.constants as c
+import transformers.utils.constants as c
 from transformers.distinct_transformer import DistinctTransformer
 from pyspark_test import PySparkTest
 

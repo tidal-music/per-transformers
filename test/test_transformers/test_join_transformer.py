@@ -2,7 +2,7 @@ from pyspark.sql.types import StructType, StructField, LongType, StringType
 
 from transformers.join_transformer import JoinTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class JoinTransformerTest(PySparkTest):

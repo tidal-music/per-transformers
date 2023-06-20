@@ -1,6 +1,6 @@
 from transformers.filter_infrequent_transformer import FilterInfrequentTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class FilterInfrequentTransformerTest(PySparkTest):

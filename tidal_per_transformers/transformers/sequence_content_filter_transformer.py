@@ -1,11 +1,11 @@
 import pyspark.sql.functions as F
 from pyspark.sql.dataframe import DataFrame
 
-import utils.constants as c
+import transformers.utils.constants as c
 from transformers.artist_filter_transformer import ArtistFilterTransformer
 from transformers.loggable_transformer import LoggableTransformer
 from transformers.track_group_filter_transformer import TrackGroupFilterTransformer
-from utils.schemas import PLAYLIST_TRACKS_SCHEMA
+from transformers.utils import PLAYLIST_TRACKS_SCHEMA
 
 MATCHES = "matches"
 

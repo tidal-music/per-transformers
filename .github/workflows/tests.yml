@@ -31,4 +31,4 @@ jobs:
       run: poetry install --no-root
 
     - name: Run unit tests
-      run: PYTHONPATH=src poetry run pytest test/
+      run: PYTHONPATH=tidal_per_transformers poetry run pytest test/

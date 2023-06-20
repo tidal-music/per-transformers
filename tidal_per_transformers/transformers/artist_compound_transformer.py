@@ -1,7 +1,7 @@
 from pyspark.sql import functions as F, DataFrame
 from transformers import LoggableTransformer
 
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class ArtistCompoundMappingTransformer(LoggableTransformer):

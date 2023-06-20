@@ -1,6 +1,6 @@
 from pyspark_test import PySparkTest
 from transformers.aggregate_transformer import AggregateTransformer
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class AggregateTransformerTest(PySparkTest):

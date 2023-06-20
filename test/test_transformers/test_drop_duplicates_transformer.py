@@ -2,7 +2,7 @@ from pyspark.sql.types import Row
 
 from transformers import DropDuplicatesTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class DropDuplicatesTransformerTest(PySparkTest):

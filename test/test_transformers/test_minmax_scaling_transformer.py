@@ -1,6 +1,6 @@
 import pyspark.sql.functions as F
 
-import utils.constants as c
+import transformers.utils.constants as c
 from transformers.minmax_scaling_transformer import MinMaxScalingTransformer
 from pyspark_test import PySparkTest
 

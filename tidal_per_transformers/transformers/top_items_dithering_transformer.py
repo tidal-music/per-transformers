@@ -1,9 +1,9 @@
 import pyspark.sql.functions as F
-import utils.constants as c
+import transformers.utils.constants as c
 
 from pyspark.sql.window import Window
 from transformers.loggable_transformer import LoggableTransformer
-from utils.dither_utils import dither
+from transformers.utils import dither
 
 
 class TopItemsDitheringTransformer(LoggableTransformer):

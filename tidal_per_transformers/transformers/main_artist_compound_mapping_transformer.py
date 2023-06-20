@@ -1,8 +1,8 @@
 from pyspark.ml.base import Transformer
 from pyspark.sql import functions as F, DataFrame
 
-import utils.constants as c
-from utils.spark_utils import get_top_items
+import transformers.utils.constants as c
+from transformers.utils import get_top_items
 
 
 class MainArtistCompoundMappingTransformer(Transformer):

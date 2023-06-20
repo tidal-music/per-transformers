@@ -1,7 +1,7 @@
 from transformers.top_items_dithering_transformer import TopItemsDitheringTransformer
 from pyspark_test import PySparkTest
 import pyspark.sql.functions as F
-import utils.constants as c
+import transformers.utils.constants as c
 
 
 class TopItemsDitheringTransformerTest(PySparkTest):
