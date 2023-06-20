@@ -11,7 +11,6 @@ classifiers = [
 
 [tool.poetry]
 name = "tidal_per_transformers"
-package-dir = "tidal_per_transformer"
 version = "0.0.4"
 description = "common transformers used by the tidal personalization team."
 authors = [
