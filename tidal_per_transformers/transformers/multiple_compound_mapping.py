@@ -1,8 +1,8 @@
 from pyspark.sql import DataFrame
 from pyspark.sql.window import Window
 import pyspark.sql.functions as F
-import transformers.utils.constants as c
-from transformers import LoggableTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers import LoggableTransformer
 
 
 class MultipleCompoundTransformer(LoggableTransformer):

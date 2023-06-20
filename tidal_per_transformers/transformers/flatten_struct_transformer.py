@@ -2,7 +2,7 @@ from typing import Dict
 import pyspark.sql.functions as F
 
 from pyspark.sql import DataFrame
-from transformers import LoggableTransformer
+from tidal_per_transformers.transformers import LoggableTransformer
 
 
 class FlattenStructTransformer(LoggableTransformer):

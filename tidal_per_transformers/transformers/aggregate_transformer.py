@@ -1,4 +1,4 @@
-from transformers import LoggableTransformer
+from tidal_per_transformers.transformers import LoggableTransformer
 
 
 class AggregateTransformer(LoggableTransformer):

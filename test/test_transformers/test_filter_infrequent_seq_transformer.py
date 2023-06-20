@@ -1,9 +1,9 @@
 import pyspark.sql.functions as F
 import pyspark.sql.types as T
 
-from transformers.filter_infrequent_seq_transformer import FilterInfrequentSeqItemsTransformer
+from tidal_per_transformers.transformers.filter_infrequent_seq_transformer import FilterInfrequentSeqItemsTransformer
 from pyspark_test import PySparkTest
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 from pyspark import Row
 
 

@@ -1,7 +1,7 @@
-from transformers.playlist_coherence_transformer import PlaylistCoherenceTransformer
+from tidal_per_transformers.transformers.playlist_coherence_transformer import PlaylistCoherenceTransformer
 from pyspark_test import PySparkTest
 
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class TestPlaylistCoherenceTransformer(PySparkTest):

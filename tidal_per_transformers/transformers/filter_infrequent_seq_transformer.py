@@ -1,10 +1,10 @@
 from typing import Optional
 
 import pyspark.sql.functions as F
-from transformers.loggable_transformer import LoggableTransformer
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
 from pyspark.sql.types import DataType
 
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class FilterInfrequentSeqItemsTransformer(LoggableTransformer):

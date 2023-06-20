@@ -1,4 +1,4 @@
-from transformers.loggable_transformer import LoggableTransformer
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
 
 
 class SelectTransformer(LoggableTransformer):

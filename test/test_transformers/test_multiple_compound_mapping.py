@@ -1,7 +1,7 @@
-from transformers.multiple_compound_mapping import MultipleCompoundTransformer
+from tidal_per_transformers.transformers.multiple_compound_mapping import MultipleCompoundTransformer
 from pyspark_test import PySparkTest
 import pyspark.sql.functions as F
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class MultipleCompoundTransformerTest(PySparkTest):

@@ -2,8 +2,8 @@ import pyspark.sql.functions as F
 import pyspark.sql.types as T
 from pyspark.sql.dataframe import DataFrame
 
-import transformers.utils.constants as c
-from transformers import ArtistFilterTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers import ArtistFilterTransformer
 
 
 class ArtistsStructFilterTransformer(ArtistFilterTransformer):

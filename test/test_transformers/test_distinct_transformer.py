@@ -1,5 +1,5 @@
-import transformers.utils.constants as c
-from transformers.distinct_transformer import DistinctTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.distinct_transformer import DistinctTransformer
 from pyspark_test import PySparkTest
 
 

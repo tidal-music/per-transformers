@@ -1,5 +1,5 @@
-import transformers.utils.constants as c
-from transformers.clean_text_transformer import CleanTextTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.clean_text_transformer import CleanTextTransformer
 
 from pyspark_test import PySparkTest
 

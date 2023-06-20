@@ -1,8 +1,8 @@
 from pyspark.sql.types import StructType, StructField, LongType, StringType, Row, ArrayType
 
-from transformers.participating_artist_transformer import ParticipatingArtistsTransformer
+from tidal_per_transformers.transformers.participating_artist_transformer import ParticipatingArtistsTransformer
 from pyspark_test import PySparkTest
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class ParticipatingArtistsTransformerTest(PySparkTest):

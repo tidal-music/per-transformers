@@ -6,7 +6,7 @@ from alphabet_detector import AlphabetDetector
 from pyspark.ml.base import Transformer
 from pyspark.sql.types import StringType
 
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 @F.pandas_udf(returnType=StringType())

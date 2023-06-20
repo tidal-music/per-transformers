@@ -1,6 +1,6 @@
-from transformers.single_artist_filter_transformer import SingleArtistFilterTransformer
+from tidal_per_transformers.transformers.single_artist_filter_transformer import SingleArtistFilterTransformer
 from pyspark_test import PySparkTest
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class TestSingleArtistFilterTransformer(PySparkTest):

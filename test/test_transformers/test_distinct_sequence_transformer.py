@@ -1,6 +1,6 @@
-from transformers import DistinctSequenceTransformer
+from tidal_per_transformers.transformers import DistinctSequenceTransformer
 from pyspark_test import PySparkTest
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 import pyspark.sql.types as T
 
 

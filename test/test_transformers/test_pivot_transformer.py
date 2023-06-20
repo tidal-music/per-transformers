@@ -1,6 +1,6 @@
 import pyspark.sql.functions as F
-import transformers.utils.constants as c
-from transformers.pivot_transformer import PivotTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.pivot_transformer import PivotTransformer
 from pyspark_test import PySparkTest
 
 

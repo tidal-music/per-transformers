@@ -1,6 +1,6 @@
 from pyspark.sql import Window, DataFrame, functions as F
-from transformers.loggable_transformer import LoggableTransformer
-import transformers.utils.constants as c
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class PlaylistCoherenceTransformer(LoggableTransformer):

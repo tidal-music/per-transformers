@@ -1,7 +1,7 @@
-from transformers.select_transformer import SelectTransformer
+from tidal_per_transformers.transformers.select_transformer import SelectTransformer
 from pyspark_test import PySparkTest
 
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 import pyspark.sql.functions as F
 
 

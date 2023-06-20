@@ -1,6 +1,6 @@
 from pyspark.sql import DataFrame
 
-from transformers.loggable_transformer import LoggableTransformer
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
 
 
 class OrderByTransformer(LoggableTransformer):

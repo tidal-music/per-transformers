@@ -1,6 +1,6 @@
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
-from transformers import LoggableTransformer
+from tidal_per_transformers.transformers import LoggableTransformer
 
 
 class CollectRankedListTransformer(LoggableTransformer):

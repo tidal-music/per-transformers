@@ -3,9 +3,9 @@ from abc import abstractmethod
 import pyspark.sql.functions as F
 from pyspark.sql.dataframe import DataFrame
 
-import transformers.utils.constants as c
-from transformers.loggable_transformer import LoggableTransformer
-from transformers.track_group_filter_transformer import apply_category_filters
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
+from tidal_per_transformers.transformers.track_group_filter_transformer import apply_category_filters
 
 
 class ArtistFilterTransformer(LoggableTransformer):

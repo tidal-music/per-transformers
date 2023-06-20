@@ -2,8 +2,8 @@ import pyspark.sql.types as T
 from pyspark.sql import Window
 from pyspark.sql import functions as F
 
-import transformers.utils.constants as c
-from transformers.loggable_transformer import LoggableTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
 
 SEQUENCE_HASH = "sequenceHash"
 

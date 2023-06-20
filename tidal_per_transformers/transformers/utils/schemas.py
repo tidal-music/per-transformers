@@ -1,5 +1,5 @@
 import pyspark.sql.types as T
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 ARTISTS_SCHEMA = T.ArrayType(T.StructType([

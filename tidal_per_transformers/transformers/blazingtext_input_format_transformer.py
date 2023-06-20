@@ -2,7 +2,7 @@ from typing import Optional
 
 import pyspark.sql.functions as F
 
-from transformers.loggable_transformer import LoggableTransformer
+from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
 
 
 class BlazingTextInputFormatTransformer(LoggableTransformer):

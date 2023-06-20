@@ -1,8 +1,8 @@
 from pyspark.sql.types import Row
 
-from transformers import DropDuplicatesTransformer
+from tidal_per_transformers.transformers import DropDuplicatesTransformer
 from pyspark_test import PySparkTest
-import transformers.utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class DropDuplicatesTransformerTest(PySparkTest):

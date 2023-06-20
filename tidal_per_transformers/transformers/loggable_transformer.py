@@ -1,8 +1,8 @@
 from abc import ABC
 from typing import Dict
 from pyspark.ml.base import Transformer
-import transformers.utils.constants as c
-from transformers.utils import as_dict
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.utils.class_utils import as_dict
 
 
 class LoggableTransformer(Transformer, ABC):

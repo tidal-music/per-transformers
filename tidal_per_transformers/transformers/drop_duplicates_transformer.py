@@ -1,7 +1,7 @@
 from typing import List
 
 from pyspark.sql import DataFrame
-from transformers import LoggableTransformer
+from tidal_per_transformers.transformers import LoggableTransformer
 
 
 class DropDuplicatesTransformer(LoggableTransformer):
