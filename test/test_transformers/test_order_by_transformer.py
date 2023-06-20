@@ -1,9 +1,9 @@
 from pyspark import Row
 
-from transformers.order_by_transformer import OrderByTransformer
+from tidal_per_transformers.transformers.order_by_transformer import OrderByTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 import pyspark.sql.functions as F
 
 

@@ -1,7 +1,7 @@
-from transformers.union_transformer import UnionTransformer
+from tidal_per_transformers.transformers.union_transformer import UnionTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class UnionTransformerTest(PySparkTest):

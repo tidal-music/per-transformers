@@ -1,7 +1,7 @@
 import pyspark.sql.functions as F
 
-import utils.constants as c
-from transformers.broadcast_array_intersect_transformer import BroadcastArrayIntersectTransformer
+import tidal_per_transformers.transformers.utils.constants as c
+from tidal_per_transformers.transformers.broadcast_array_intersect_transformer import BroadcastArrayIntersectTransformer
 from pyspark_test import PySparkTest
 
 

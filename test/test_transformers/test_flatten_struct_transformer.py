@@ -1,8 +1,8 @@
 from pyspark.sql.types import StructType, StructField, LongType, StringType, Row, ArrayType
 
-from transformers.flatten_struct_transformer import FlattenStructTransformer
+from tidal_per_transformers.transformers.flatten_struct_transformer import FlattenStructTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class FlattenStructTransformerTest(PySparkTest):

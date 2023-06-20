@@ -1,7 +1,7 @@
-from transformers.stack_transformer import StackTransformer
+from tidal_per_transformers.transformers.stack_transformer import StackTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class StackTransformerTest(PySparkTest):

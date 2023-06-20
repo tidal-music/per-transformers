@@ -1,6 +1,6 @@
-from transformers.select_transformer import SelectTransformer
+from tidal_per_transformers.transformers.select_transformer import SelectTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class TestLoggableTransformer(PySparkTest):

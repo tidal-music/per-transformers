@@ -1,7 +1,7 @@
 from pyspark.sql.types import Row
-from transformers.collect_ranked_map_transformer import CollectRankedMapTransformer
+from tidal_per_transformers.transformers.collect_ranked_map_transformer import CollectRankedMapTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class AggregateTransformerTest(PySparkTest):

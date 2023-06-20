@@ -1,4 +1,4 @@
-from transformers.top_items_transformer import TopItemsTransformer
+from tidal_per_transformers.transformers.top_items_transformer import TopItemsTransformer
 from pyspark_test import PySparkTest
 import pyspark.sql.functions as F
 

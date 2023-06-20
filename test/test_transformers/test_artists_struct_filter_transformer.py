@@ -1,8 +1,9 @@
-from transformers.artists_struct_filter_transformer import ArtistsStructFilterTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
-from utils.schemas import ARTISTS_SCHEMA
+import tidal_per_transformers.transformers.utils.constants as c
 import pyspark.sql.types as T
+
+from tidal_per_transformers.transformers.utils.schemas import ARTISTS_SCHEMA
+from tidal_per_transformers.transformers import ArtistsStructFilterTransformer
 
 
 class TestArtistsStructFilterTransformer(PySparkTest):

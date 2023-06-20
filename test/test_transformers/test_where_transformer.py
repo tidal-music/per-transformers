@@ -1,7 +1,7 @@
-from transformers.where_transformer import WhereTransformer
+from tidal_per_transformers.transformers.where_transformer import WhereTransformer
 from pyspark_test import PySparkTest
 
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 import pyspark.sql.functions as F
 
 

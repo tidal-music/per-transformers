@@ -1,6 +1,6 @@
-from transformers import DropColumnsTransformer
+from tidal_per_transformers.transformers import DropColumnsTransformer
 from pyspark_test import PySparkTest
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class DropColumnsTransformerTest(PySparkTest):

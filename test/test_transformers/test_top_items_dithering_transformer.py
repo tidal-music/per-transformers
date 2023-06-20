@@ -1,7 +1,7 @@
-from transformers.top_items_dithering_transformer import TopItemsDitheringTransformer
+from tidal_per_transformers.transformers.top_items_dithering_transformer import TopItemsDitheringTransformer
 from pyspark_test import PySparkTest
 import pyspark.sql.functions as F
-import utils.constants as c
+import tidal_per_transformers.transformers.utils.constants as c
 
 
 class TopItemsDitheringTransformerTest(PySparkTest):
