@@ -8,7 +8,7 @@ from .clean_text_transformer import CleanTextTransformer
 from .collect_ranked_list_transformer import CollectRankedListTransformer
 from .deduplicate_sequence_transformer import DuplicateSequenceTransformer
 from .distinct_sequence_transformer import DistinctSequenceTransformer
-# from .distinct_transformer import DistinctTransformer
+from .distinct_transformer import DistinctTransformer
 from .drop_duplicates_transformer import DropDuplicatesTransformer
 from .filter_infrequent_seq_transformer import FilterInfrequentSeqItemsTransformer
 from .filter_infrequent_transformer import FilterInfrequentTransformer
@@ -37,3 +37,4 @@ from .with_column_transfomer import WithColumnTransformer
 from .collect_ranked_map_transformer import CollectRankedMapTransformer
 from .broadcast_array_intersect_transformer import BroadcastArrayIntersectTransformer
 from .drop_columns_transformer import DropColumnsTransformer
+from .filter_inactive_users_transformer import FilterInactiveUserTransformer
