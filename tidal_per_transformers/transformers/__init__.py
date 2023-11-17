@@ -38,3 +38,4 @@ from .collect_ranked_map_transformer import CollectRankedMapTransformer
 from .broadcast_array_intersect_transformer import BroadcastArrayIntersectTransformer
 from .drop_columns_transformer import DropColumnsTransformer
 from .filter_inactive_users_transformer import FilterInactiveUserTransformer
+from .score_normalizer_transformer import ScoreNormalizerTransformer
