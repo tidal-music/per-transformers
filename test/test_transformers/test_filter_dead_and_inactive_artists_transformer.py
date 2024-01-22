@@ -7,7 +7,7 @@ from tidal_per_transformers.transformers.filter_dead_and_inactive_artists_transf
 class FilterDeadAndInactiveArtistsTransformerTest(PySparkTest):
 
     def test_transformer(self):
-        dataset = self.sc.createDataFrame([
+        dataset = self.spark.createDataFrame([
             (79386403, "A", 1, "1e7aed86737846c9f"),
             (79386403, "B", 2, "1e7aed86737846c9g"),
             (79386403, "C", 3, "1e7aed86737846c9g"),
@@ -22,7 +22,7 @@ class FilterDeadAndInactiveArtistsTransformerTest(PySparkTest):
             (79386403, "L", 12, "1e7aed86737846c9f")
         ], [c.RELEASE_DATE, c.TITLE, c.ARTIST_ID, c.MASTER_BUNDLE_ID])
 
-        metadata = self.sc.createDataFrame([
+        metadata = self.spark.createDataFrame([
             ("1", "Active Years", "1958-??-??_2001-??-??"),
             ("2", "Active Years", "1998-??-??_2001-??-??"),
             ("3", "Active Years", "2008-??-??_2011-??-??"),
