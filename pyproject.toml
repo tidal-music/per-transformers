@@ -11,7 +11,7 @@ classifiers = [
 
 [tool.poetry]
 name = "tidal_per_transformers"
-version = "0.0.9"
+version = "0.0.10"
 description = "common transformers used by the tidal personalization team."
 authors = [
     "Loay <loay@squareup.com>",
