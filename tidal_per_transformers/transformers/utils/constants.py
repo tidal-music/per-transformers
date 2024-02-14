@@ -269,6 +269,7 @@ USER_TRACKS_FAVOURITES = 'UserTracksFavourite'
 USER_TRACKS_HISTORY = 'UserTracksHistory'
 USER_TRACKS_PLAYLIST = 'UserTracksPlayLists'
 NUM_MAIN_ARTISTS = "numMainArtists"
+AVAILABLE_COUNTRY_CODES = "AvailableCountryCodes"
 
 # ----- Celeste Metadata -----
 METADATA_ID = "metadata_id"
