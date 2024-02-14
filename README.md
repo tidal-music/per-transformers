@@ -9,5 +9,5 @@ Repo containing common pyspark transformers for different pipelines
 - Set local pyenv version `pyenv local transformers`
 - Activate the virtual pyenv using `pyenv activate transformers`
 - Upgrade the pip package installer `pip install --upgrade pip`
-- Install poetry for package management `pip install poetry==1.5.1`
+- Install poetry for package management `pip install poetry==1.7.0`
 - Install dependencies from the lock file `poetry install --no-root` 
