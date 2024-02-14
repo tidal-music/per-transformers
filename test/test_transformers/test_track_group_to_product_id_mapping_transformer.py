@@ -1,11 +1,10 @@
-from pyspark_test import PySparkTest
-from tidal_per_transformers.transformers.aggregate_transformer import AggregateTransformer
 import tidal_per_transformers.transformers.utils.constants as c
+from pyspark_test import PySparkTest
 from tidal_per_transformers.transformers.track_group_to_product_id_mapping_transformer import \
     TrackGroupToProductIdMappingByUserCountryTransformer
 
 
-class AggregateTransformerTest(PySparkTest):
+class TrackGroupToProductIdMappingByUserCountryTransformerTest(PySparkTest):
 
     def test_transform(self):
         track_metadata = self.spark.createDataFrame([
