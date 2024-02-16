@@ -62,6 +62,7 @@ MASTER_BUNDLE_ID = "masterBundleId"
 TRACK_BUNDLE_ID = "trackBundleId"
 MIX_ID = "mixId"
 ARTIFACT_ID = "artifact_id"
+VIDEO_ID = "videoId"
 
 
 DATA_FORMAT = "dataFormat"
@@ -269,7 +270,9 @@ USER_TRACKS_FAVOURITES = 'UserTracksFavourite'
 USER_TRACKS_HISTORY = 'UserTracksHistory'
 USER_TRACKS_PLAYLIST = 'UserTracksPlayLists'
 NUM_MAIN_ARTISTS = "numMainArtists"
-AVAILABLE_COUNTRY_CODES = "AvailableCountryCodes"
+ARTIFACT_TYPE = "artifactType"
+COMPOUND_ID = "compoundId"
+RANK = "rank"
 
 # ----- Celeste Metadata -----
 METADATA_ID = "metadata_id"
