@@ -35,12 +35,13 @@ alphabet-detector = "0.0.7"
 pyarrow = "15.0.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "6.1.2"
+pytest = "8.0.2"
 coverage = ">=4.5.2"
-pytest-cov = ">=2.6.1"
+pytest-cov = ">=4.1.0"
 coveralls = ">=1.6.0"
 mock = ">=2.0.0"
 moto = ">=3.1.11"
+setuptools  = ">=69.1.1"
 
 [build-system]
 requires = ["poetry-core"]
