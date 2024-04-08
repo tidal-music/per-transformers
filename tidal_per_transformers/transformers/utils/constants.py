@@ -87,6 +87,7 @@ TYPE = "type"
 VALUE = "value"
 VARIABLE = "variable"
 DT = 'dt'
+VARIANT = "variant"
 
 # ----- Rovi dataset constants -----
 ROVI = "ROVI"
