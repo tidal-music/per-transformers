@@ -23,6 +23,7 @@ license = "Apache License V 2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
+python = ">=3.10.0"
 pyspark = ">=3.5.0"
 numpy = ">=1.16.4"
 s3fs = "2022.11.0"
