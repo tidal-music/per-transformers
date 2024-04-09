@@ -4,8 +4,8 @@ Repo containing common pyspark transformers for different pipelines
 ## Downloading Dependencies
 
 - Make sure you have pyenv and [pyenv](https://github.com/pyenv/pyenv) amd [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) installed on your local environment.
-- Install python 3.8.16 with pyenv `pyenv install 3.12.0`.
-- Set up a new virtual env `pyenv virtualenv 3.12.0 transformers`
+- Install python 3.8.16 with pyenv `pyenv install 3.10.13`.
+- Set up a new virtual env `pyenv virtualenv 3.10.13 transformers`
 - Set local pyenv version `pyenv local transformers`
 - Activate the virtual pyenv using `pyenv activate transformers`
 - Upgrade the pip package installer `pip install --upgrade pip`
