@@ -12,7 +12,7 @@ class Artifact(Enum):
     PLAYLIST = "playlist"
     VIDEO = "video"
 
-    
+
 class PlaylistCategory(Enum):
     DOLBY = "DOLBY"
     IMMERSIVE = "IMMERSIVE"
@@ -26,7 +26,7 @@ class PlaylistCategory(Enum):
     HITS = "HITS"
     ONE_O_ONE = "101"
 
-    
+
 MAIN_ARTIST_FILTER = "filter(artists, x -> x.main == 'true')"
 
 RN = "rn"
@@ -46,7 +46,6 @@ SIZE = "size"
 CONTRIBUTOR_ID = "contributorId"
 CONTRIBUTOR_TYPE = "contributorType"
 
-
 # ----- Dataset Constants -----
 # IDs
 ID = "id"
@@ -63,7 +62,6 @@ TRACK_BUNDLE_ID = "trackBundleId"
 MIX_ID = "mixId"
 ARTIFACT_ID = "artifact_id"
 VIDEO_ID = "videoId"
-
 
 DATA_FORMAT = "dataFormat"
 TRACKS = "tracks"
@@ -100,7 +98,6 @@ ROVI_ARTIST = "ARTIST"
 METADATA_TYPE_ID = "metadata_type_id"
 PLAYBACKLOG = "playbacklog"
 USER_STATE = "userstate"
-
 
 ROVI_ACTIVE_YEARS = "Active Years"
 ACTIVE_YEARS = "activeYears"
@@ -197,7 +194,6 @@ class AssociationName(Enum):
     CONTRIBUTOR_FOR = "CONTRIBUTOR_FOR"
 
 
-
 # ----- Column Names -----
 DATE_ADDED = "dateAdded"
 TRACK_ID = "trackId"
@@ -219,7 +215,8 @@ RELEASE_DATE = "releaseDate"
 NUM_FEATURING_ALBUMS = "numFeaturingAlbums"
 MIN_RELEASE_DATE = "minReleaseDate"
 LAST_STREAMED_DATE = "lastStreamedDate"
-
+RECENT = "recent"
+RELEVANT = "relevant"
 
 # ---- Misc Constants -----
 MAIN_ARTISTS = "mainArtists"
@@ -285,7 +282,6 @@ ASSOCIATION_ARTIFACT_ID = "association_artifact_id"
 ASSOCIATION_ID = "associationId"
 WEIGHT = "weight"
 
-
 # ----- FS -----
 METADATA = 'metadata'
 USERS = 'users'
@@ -300,7 +296,6 @@ ARTIFACT_TYPE_ID = {
     "TRACKGROUP": 7
 }
 
-
 # ----- Write modes -----
 OVERWRITE = 'overwrite'
 UPSERT = 'upsert'
@@ -314,4 +309,3 @@ OVERWRITE_SCHEMA = 'overwriteSchema'
 # ----- formats -----
 DELTA = "delta"
 PARQUET = "parquet"
-
