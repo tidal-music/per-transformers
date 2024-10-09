@@ -9,7 +9,7 @@ class AggregateTransformerTest(PySparkTest):
     def test_transform(self):
         dataset = self.spark.createDataFrame([
             (1, [10, 15], 1, 10),
-            (1, [11, 15], 2, 6),
+            (1, [11, 15, 14], 2, 7),
             (2, [12], 1, 1),
             (2, [13, 10, 11], 2, 9),
             (2, [14, 13, 12, 11], 3, 4)
@@ -21,9 +21,9 @@ class AggregateTransformerTest(PySparkTest):
                                             recent_alias=c.RECENT,
                                             relevant_alias=c.RELEVANT,
                                             list_col=c.ITEM,
-                                            limit=3,).transform(dataset)
+                                            limit=4).transform(dataset)
 
-        self.assertEqual([Row(user=1, recent=[15, 11, 15], relevant=[15, 10]),
-                         Row(user=2, recent=[13, 12, 11], relevant=[11, 10, 13]),
+        self.assertEqual([Row(user=1, recent=[15, 11, 15, 14], relevant=[15, 11, 15, 10]),
+                         Row(user=2, recent=[14, 13, 12, 11], relevant=[14,11, 10, 13]),
                           ],
                          output.collect())
