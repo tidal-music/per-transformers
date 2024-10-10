@@ -30,7 +30,7 @@ class GenericRecommendationFormatter(LoggableTransformer):
                         F.posexplode(self.recommendations_col))
                 .withColumn(self.recommendations_col,
                             F.collect_list(F.struct(F.col(c.TYPE), F.col("col").alias(c.ID))).over(
-                                Window.partitionBy().orderBy("pos")))
+                                Window.partitionBy(c.HASH_KEY).orderBy("pos")))
                 .groupby([c.HASH_KEY, c.MODULE_ID])
                 .agg(F.max(self.recommendations_col).alias(self.recommendations_col))
                 )
