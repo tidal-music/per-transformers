@@ -39,3 +39,4 @@ from .broadcast_array_intersect_transformer import BroadcastArrayIntersectTransf
 from .drop_columns_transformer import DropColumnsTransformer
 from .filter_inactive_users_transformer import FilterInactiveUserTransformer
 from .collect_sessions_transformer import CollectSessionsTransformer
+from .generic_recommendation_formatter import GenericRecommendationFormatter

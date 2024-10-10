@@ -5,7 +5,8 @@ from tidal_per_transformers.transformers import LoggableTransformer
 
 class GenericRecommendationFormatter(LoggableTransformer):
     """
-
+    Transformer to add standard format to a set of recommendations (e.g. userId, [recommendedIds])
+    with a template that will specify the content type, the module and its version.
     """
 
     def __init__(self,
@@ -29,4 +30,3 @@ class GenericRecommendationFormatter(LoggableTransformer):
                 .groupby([F.col(self.hash_key).alias(c.HASH_KEY), c.MODULE_ID])
                 .agg(F.collect_list(F.struct(F.col(c.TYPE), F.col(c.ID))).alias(self.recommendations_col))
                 )
-

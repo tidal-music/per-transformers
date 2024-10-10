@@ -21,8 +21,8 @@ class AggregateTransformerTest(PySparkTest):
 
         self.assertEqual([
             Row(hashKey=1, moduleId=f'{c.MODULE_ID}_v1',
-                item=[Row(type='track', id=11), Row(type='track', id=15)]),
+                item=[Row(type='trackGroup', id=11), Row(type='trackGroup', id=15)]),
             Row(hashKey=2, moduleId=f'{c.MODULE_ID}_v1',
-                item=[Row(type='track', id=12), Row(type='track', id=10), Row(type='track', id=15)])
+                item=[Row(type='trackGroup', id=12), Row(type='trackGroup', id=10), Row(type='trackGroup', id=15)])
             ],
             output.collect())
