@@ -87,6 +87,9 @@ VARIABLE = "variable"
 DT = 'dt'
 VARIANT = "variant"
 
+HASH_KEY = "hashKey"
+MODULE_ID = "moduleId"
+
 # ----- Rovi dataset constants -----
 ROVI = "ROVI"
 SOURCE = "source"
