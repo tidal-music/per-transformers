@@ -12,7 +12,7 @@ class AggregateTransformerTest(PySparkTest):
             (2, [12, 10, 15]),
         ], [c.USER, c.ITEM])
 
-        output = GenericRecommendationFormatter(hash_key=c.USER,
+        output = GenericRecommendationFormatter(group_key=c.USER,
                                                 recommendations_col=c.ITEM,
                                                 item_type=c.TRACK_GROUP,
                                                 module_name=c.MODULE_ID,
