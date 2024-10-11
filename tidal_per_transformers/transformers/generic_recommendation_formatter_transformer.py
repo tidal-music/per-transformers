@@ -3,7 +3,7 @@ from tidal_per_transformers.transformers.utils import constants as c
 from tidal_per_transformers.transformers import LoggableTransformer
 
 
-class GenericRecommendationFormatter(LoggableTransformer):
+class GenericRecommendationFormatterTransformer(LoggableTransformer):
     """
     Transformer to add standard format to a set of recommendations (e.g. userId, [recommendedIds])
     with a template that will specify the content type, the module and its version.
@@ -15,7 +15,7 @@ class GenericRecommendationFormatter(LoggableTransformer):
                  item_type: str,
                  module_name: str,
                  module_version: str):
-        super(GenericRecommendationFormatter, self).__init__()
+        super(GenericRecommendationFormatterTransformer, self).__init__()
         self.group_key = group_key
         self.recommendations_col = recommendations_col
         self.item_type = item_type
