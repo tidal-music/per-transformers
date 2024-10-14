@@ -15,15 +15,16 @@ class AggregateTransformerTest(PySparkTest):
 
         output = GenericRecommendationFormatterTransformer(group_key=c.USER,
                                                            recommendations_col=c.ITEM,
-                                                           item_type=c.TRACK_GROUP,
+                                                           item_type=c.TRACK,
                                                            module_name=c.MODULE_ID,
-                                                           module_version="1"
                                                            ).transform(dataset)
 
         self.assertEqual([
-            Row(hashKey=1, moduleId=f'{c.MODULE_ID}_v1',
-                item=[Row(type='trackGroup', id=11), Row(type='trackGroup', id=15)]),
-            Row(hashKey=2, moduleId=f'{c.MODULE_ID}_v1',
-                item=[Row(type='trackGroup', id=12), Row(type='trackGroup', id=10), Row(type='trackGroup', id=15)])
+            Row(hashKey="1", moduleId=c.MODULE_ID,
+                item=[Row(type=c.TRACK.upper(), id="11"), Row(type=c.TRACK.upper(), id="15")]),
+            Row(hashKey="2", moduleId=c.MODULE_ID,
+                item=[Row(type=c.TRACK.upper(), id="12"),
+                      Row(type=c.TRACK.upper(), id="10"),
+                      Row(type=c.TRACK.upper(), id="15")])
         ],
             output.collect())
