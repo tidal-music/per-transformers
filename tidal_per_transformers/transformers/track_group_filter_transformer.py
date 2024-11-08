@@ -55,7 +55,7 @@ class TrackGroupFilterTransformer(LoggableTransformer):
                                             self.remove_ambient_music,
                                             self.remove_children_music)
 
-        return tracks.join(cleaned_tracks, c.TRACK_GROUP)
+        return tracks.join(cleaned_tracks, c.TRACK_GROUP, how="left")
 
     @staticmethod
     def apply_filters(category_filters: DataFrame,
