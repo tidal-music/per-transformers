@@ -48,22 +48,27 @@ class ArtistFilterTransformer(LoggableTransformer):
                       streamers_count: int,
                       drop_holiday: bool,
                       drop_ambient: bool,
-                      drop_children: bool) -> DataFrame:
+                      drop_children: bool,
+                      artist_column_for_filter: str) -> DataFrame:
         """Applies filters given in a data frame
 
-        :param category_filters:    dataframe containing filters
-        :param stream_count:        min stream count
-        :param streamers_count:     min streamers count
-        :param drop_holiday:        flag to drop holiday
-        :param drop_ambient:        flag to drop ambient music
-        :param drop_children:       flag to drop children
-        :return: cleaned dataframe
+        :param category_filters:            dataframe containing filters
+        :param stream_count:                min stream count
+        :param streamers_count:             min streamers count
+        :param drop_holiday:                flag to drop holiday
+        :param drop_ambient:                flag to drop ambient music
+        :param drop_children:               flag to drop children
+        :param artist_column_for_filter:    column containing artists
+        :return:                            cleaned dataframe
         """
-        return apply_category_filters(dataframe=category_filters
-                                      .where(F.col(c.AVAILABLE))
-                                      .where(F.col(c.NON_MUSIC) == 0)
-                                      .where(F.col(c.STREAM_COUNT) >= stream_count)
-                                      .where(F.col(c.STREAMERS_COUNT) >= streamers_count),
-                                      drop_holiday=drop_holiday,
-                                      drop_ambient=drop_ambient,
-                                      drop_children=drop_children).select(c.ARTIST_ID)
+        all_checks = category_filters.where((F.col(c.AVAILABLE) == False) |
+                                            (F.col(c.NON_MUSIC) == 1) |
+                                            (F.col(c.STREAM_COUNT) < stream_count) |
+                                            (F.col(c.STREAMERS_COUNT) < streamers_count)
+                                            ).select(artist_column_for_filter)
+        category_filters = apply_category_filters(dataframe=category_filters,
+                                                  drop_holiday=drop_holiday,
+                                                  drop_ambient=drop_ambient,
+                                                  drop_children=drop_children,
+                                                  key=artist_column_for_filter).select(artist_column_for_filter)
+        return all_checks.union(category_filters)

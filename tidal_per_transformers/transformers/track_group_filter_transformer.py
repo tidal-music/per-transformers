@@ -75,11 +75,16 @@ class TrackGroupFilterTransformer(LoggableTransformer):
         category_filters = apply_category_filters(dataframe=category_filters,
                                                   drop_holiday=drop_holiday,
                                                   drop_ambient=drop_ambient,
-                                                  drop_children=drop_children).select(c.TRACK_GROUP)
+                                                  drop_children=drop_children,
+                                                  key=c.TRACK_GROUP).select(c.TRACK_GROUP)
         return all_checks.union(category_filters)
 
 
-def apply_category_filters(dataframe: DataFrame, drop_holiday: bool, drop_ambient: bool, drop_children: bool):
+def apply_category_filters(dataframe: DataFrame,
+                           drop_holiday: bool,
+                           drop_ambient: bool,
+                           drop_children: bool,
+                           key: str):
     dropped_dataframe = dataframe
     if drop_children:
         dropped_dataframe = dropped_dataframe.where(F.col(c.CHILDREN) == 0)
@@ -90,4 +95,4 @@ def apply_category_filters(dataframe: DataFrame, drop_holiday: bool, drop_ambien
     if drop_holiday:
         dropped_dataframe = dropped_dataframe.where(F.col(c.HOLIDAY) == 0)
 
-    return dataframe.join(dropped_dataframe.select(c.TRACK_GROUP), c.TRACK_GROUP, "left_anti")
+    return dataframe.join(dropped_dataframe.select(key), key, "left_anti")

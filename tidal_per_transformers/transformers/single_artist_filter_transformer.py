@@ -39,13 +39,14 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
         self.artist_column = artist_column
 
     def _transform(self, dataset):
-        cleaned_artists = self.apply_filters(self.artist_filters,
-                                             self.min_artist_streams,
-                                             self.min_artist_streamers,
-                                             self.remove_holiday_music,
-                                             self.remove_ambient_music,
-                                             self.remove_children_music)
+        filtered_artists = self.apply_filters(self.artist_filters,
+                                              self.min_artist_streams,
+                                              self.min_artist_streamers,
+                                              self.remove_holiday_music,
+                                              self.remove_ambient_music,
+                                              self.remove_children_music,
+                                              self.artist_column)
         return (dataset
-                .join(cleaned_artists.withColumnRenamed(c.ARTIST_ID, self.artist_column),
+                .join(filtered_artists.withColumnRenamed(c.ARTIST_ID, self.artist_column),
                       self.artist_column,
-                      how="inner"))
+                      how="left_anti"))
