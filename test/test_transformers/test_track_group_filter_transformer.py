@@ -17,6 +17,7 @@ class TrackGroupFilterTransformerTest(PySparkTest):
             ("f",),
             ("g",),
             ("h",),
+            ("x",),
         ], [c.TRACK_GROUP])
 
         filters = self.get_track_group_content_filter_table()
@@ -30,7 +31,7 @@ class TrackGroupFilterTransformerTest(PySparkTest):
                                           min_track_streamers=200,
                                           min_track_streams=500).transform(track_groups)
 
-        self.assertEqual(1, res.count())
+        self.assertEqual(2, res.count())
         self.assertEqual(track_groups.columns, res.columns)
 
         res_with_children = TrackGroupFilterTransformer(filters,
@@ -42,7 +43,7 @@ class TrackGroupFilterTransformerTest(PySparkTest):
                                                         min_track_streamers=200,
                                                         min_track_streams=500).transform(track_groups)
 
-        self.assertEqual(2, res_with_children.count())
+        self.assertEqual(3, res_with_children.count())
 
         res_no_filters = TrackGroupFilterTransformer(filters,
                                                      remove_holiday_music=False,
@@ -53,7 +54,7 @@ class TrackGroupFilterTransformerTest(PySparkTest):
                                                      min_track_streamers=0,
                                                      min_track_streams=0).transform(track_groups)
 
-        self.assertEqual(7, res_no_filters.count())
+        self.assertEqual(8, res_no_filters.count())
         self.assertEqual(0, res_no_filters.where(F.col(c.TRACK_GROUP) == "h").count())
 
     def get_track_group_content_filter_table(self):
