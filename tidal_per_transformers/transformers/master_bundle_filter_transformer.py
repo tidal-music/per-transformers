@@ -46,18 +46,18 @@ class MasterBundleFilterTransformer(LoggableTransformer):
         self.album_types = album_types or [c.ALBUM.upper()]
 
     def _transform(self, dataset):
-        cleaned_albums = self.apply_filters(self.album_filters,
-                                            stream_count=self.min_album_streams,
-                                            streamers_count=self.min_album_streamers,
-                                            album_types=self.album_types,
-                                            drop_holiday=self.remove_holiday_music,
-                                            drop_ambient=self.remove_ambient_music,
-                                            drop_children=self.remove_children_music,
-                                            drop_variant_versions=self.remove_variant_versions)
+        filtered_albums = self.apply_filters(self.album_filters,
+                                             stream_count=self.min_album_streams,
+                                             streamers_count=self.min_album_streamers,
+                                             album_types=self.album_types,
+                                             drop_holiday=self.remove_holiday_music,
+                                             drop_ambient=self.remove_ambient_music,
+                                             drop_children=self.remove_children_music,
+                                             drop_variant_versions=self.remove_variant_versions)
 
         return (dataset
-                .join(cleaned_albums.withColumnRenamed(c.MASTER_BUNDLE_ID, self.album_column),
-                      self.album_column))
+                .join(filtered_albums.withColumnRenamed(c.MASTER_BUNDLE_ID, self.album_column),
+                      self.album_column, how="left_anti"))
 
     @staticmethod
     def apply_filters(category_filters: DataFrame,
@@ -80,17 +80,19 @@ class MasterBundleFilterTransformer(LoggableTransformer):
         :param drop_variant_versions:   flag to drop variant versions
         :return: cleaned dataframe
         """
-        albums = apply_category_filters(dataframe=category_filters
-                                        .where(F.col(c.AVAILABLE))
-                                        .where(F.col(c.ALBUM_TYPE).isin(album_types))
-                                        .where(F.col(c.NON_MUSIC) == 0)
-                                        .where(F.col(c.STREAM_COUNT) >= stream_count)
-                                        .where(F.col(c.STREAMERS_COUNT) >= streamers_count),
-                                        drop_holiday=drop_holiday,
-                                        drop_ambient=drop_ambient,
-                                        drop_children=drop_children)
+        variant_albums = category_filters.where(F.col(c.VARIANT) == 1).select(c.MASTER_BUNDLE_ID)
+        all_checks = category_filters.where((F.col(c.AVAILABLE) == False) |
+                                            (F.col(c.NON_MUSIC) == 1) |
+                                            (F.col(c.STREAM_COUNT) < stream_count) |
+                                            (F.col(c.STREAMERS_COUNT) < streamers_count) |
+                                            ~F.col(c.ALBUM_TYPE).isin(album_types)
+                                            ).select(c.MASTER_BUNDLE_ID)
 
-        if drop_variant_versions:
-            albums = albums.where(F.col(c.VARIANT) == 0)
+        category_filters = apply_category_filters(dataframe=category_filters,
+                                                  drop_holiday=drop_holiday,
+                                                  drop_ambient=drop_ambient,
+                                                  drop_children=drop_children,
+                                                  key=c.MASTER_BUNDLE_ID).select(c.MASTER_BUNDLE_ID)
 
-        return albums.select(c.MASTER_BUNDLE_ID)
+        return (all_checks.union(category_filters).union(variant_albums) if drop_variant_versions
+                else all_checks.union(category_filters))

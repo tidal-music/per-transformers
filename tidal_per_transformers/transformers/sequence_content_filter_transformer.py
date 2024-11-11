@@ -75,7 +75,8 @@ class SequenceContentFilterTransformer(LoggableTransformer):
                                                      self.min_artist_streamers,
                                                      self.remove_holiday_music,
                                                      self.remove_ambient_music,
-                                                     self.remove_children_music).select(c.ARTIST_ID)
+                                                     self.remove_children_music,
+                                                     artist_column_for_filter=c.ARTIST_ID).select(c.ARTIST_ID)
 
     def get_cleaned_track_groups(self):
         return TrackGroupFilterTransformer.apply_filters(self.track_filters,

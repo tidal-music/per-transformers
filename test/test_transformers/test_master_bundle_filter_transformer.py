@@ -15,6 +15,7 @@ class MasterBundleFilterTransformerTest(PySparkTest):
             ("f",),
             ("g",),
             ("h",),
+            ("x",),
         ], [c.MASTER_BUNDLE_ID])
 
         filters = self.spark.createDataFrame([
@@ -46,5 +47,6 @@ class MasterBundleFilterTransformerTest(PySparkTest):
                                             remove_children_music=True,
                                             remove_variant_versions=True).transform(albums).collect()
 
-        self.assertEqual(1, len(res))
-        self.assertEqual("c", res[0][0])
+        self.assertEqual(2, len(res))
+        [self.assertIn(x[0], ("c", "x")) for x in res]
+

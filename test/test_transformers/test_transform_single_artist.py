@@ -27,6 +27,7 @@ class TestSingleArtistFilterTransformer(PySparkTest):
 
     def test_transform_artist_id(self):
         artists = self.spark.createDataFrame([
+            (0,),
             (65,),
             (222,),
             (23406735,),
@@ -45,7 +46,7 @@ class TestSingleArtistFilterTransformer(PySparkTest):
                                             min_artist_streamers=1_000,
                                             ).transform(artists)
 
-        self.assertEqual(2, res.count())
+        self.assertEqual(3, res.count())
         self.assertEqual(artists.columns, res.columns)
 
         res_with_children = SingleArtistFilterTransformer(self.artist_category_filters,
@@ -56,7 +57,7 @@ class TestSingleArtistFilterTransformer(PySparkTest):
                                                           min_artist_streamers=1_000,
                                                           ).transform(artists)
 
-        self.assertEqual(3, res_with_children.count())
+        self.assertEqual(4, res_with_children.count())
 
         res_min_filters = SingleArtistFilterTransformer(self.artist_category_filters,
                                                         remove_children_music=False,
@@ -66,4 +67,4 @@ class TestSingleArtistFilterTransformer(PySparkTest):
                                                         min_artist_streamers=0,
                                                         ).transform(artists)
 
-        self.assertEqual(7, res_min_filters.count())
+        self.assertEqual(8, res_min_filters.count())
