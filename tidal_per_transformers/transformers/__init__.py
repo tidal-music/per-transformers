@@ -40,3 +40,4 @@ from .drop_columns_transformer import DropColumnsTransformer
 from .filter_inactive_users_transformer import FilterInactiveUserTransformer
 from .collect_sessions_transformer import CollectSessionsTransformer
 from .generic_recommendation_formatter_transformer import GenericRecommendationFormatterTransformer
+from .normalize_embedding_transformer import NormalizeEmbeddingTransformer
