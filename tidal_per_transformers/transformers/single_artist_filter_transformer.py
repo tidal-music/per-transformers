@@ -12,7 +12,6 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
         :param remove_children_music:   flag for toggling children music on/off
         :param min_artist_streams:      minimum number of streams for an artist to be included
         :param min_artist_streamers:    minimum number of unique listeners for an artist to be included
-        :param artist_column:           Column containing artists
         """
 
     def __init__(self,
@@ -22,7 +21,6 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
                  remove_holiday_music: bool,
                  min_artist_streamers: int = 500,
                  min_artist_streams: int = 2000,
-                 artist_column: str = c.ARTIST_ID
                  ):
         super().__init__(artist_filters,
                          remove_children_music,
@@ -36,7 +34,6 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
         self.remove_holiday_music = remove_holiday_music
         self.min_artist_streamers = min_artist_streamers
         self.min_artist_streams = min_artist_streams
-        self.artist_column = artist_column
 
     def _transform(self, dataset):
         filtered_artists = self.apply_filters(self.artist_filters,
@@ -44,9 +41,8 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
                                               self.min_artist_streamers,
                                               self.remove_holiday_music,
                                               self.remove_ambient_music,
-                                              self.remove_children_music,
-                                              self.artist_column)
+                                              self.remove_children_music)
         return (dataset
-                .join(filtered_artists.withColumnRenamed(c.ARTIST_ID, self.artist_column),
-                      self.artist_column,
+                .join(filtered_artists.withColumnRenamed(c.ARTIST_ID, c.ARTIST_ID),
+                      c.ARTIST_ID,
                       how="left_anti"))
