@@ -48,8 +48,7 @@ class ArtistFilterTransformer(LoggableTransformer):
                       streamers_count: int,
                       drop_holiday: bool,
                       drop_ambient: bool,
-                      drop_children: bool,
-                      artist_column_for_filter: str) -> DataFrame:
+                      drop_children: bool) -> DataFrame:
         """Applies filters given in a data frame
 
         :param category_filters:            dataframe containing filters
@@ -58,17 +57,16 @@ class ArtistFilterTransformer(LoggableTransformer):
         :param drop_holiday:                flag to drop holiday
         :param drop_ambient:                flag to drop ambient music
         :param drop_children:               flag to drop children
-        :param artist_column_for_filter:    column containing artists
         :return:                            cleaned dataframe
         """
         all_checks = category_filters.where((F.col(c.AVAILABLE) == False) |
                                             (F.col(c.NON_MUSIC) == 1) |
                                             (F.col(c.STREAM_COUNT) < stream_count) |
                                             (F.col(c.STREAMERS_COUNT) < streamers_count)
-                                            ).select(artist_column_for_filter)
+                                            ).select(c.ARTIST_ID)
         category_filters = apply_category_filters(dataframe=category_filters,
                                                   drop_holiday=drop_holiday,
                                                   drop_ambient=drop_ambient,
                                                   drop_children=drop_children,
-                                                  key=artist_column_for_filter).select(artist_column_for_filter)
+                                                  key=c.ARTIST_ID).select(c.ARTIST_ID)
         return all_checks.union(category_filters)

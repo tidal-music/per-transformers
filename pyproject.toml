@@ -1,17 +1,6 @@
-[project]
-requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: Apache License V 2.0",
-    "Operating System :: OS Independent",
-]
-
-[project.urls]
-"GitHub" = "https://github.com/tidal-music/per-transformers"
-
 [tool.poetry]
 name = "tidal_per_transformers"
-version = "0.3.1"
+version = "0.4.0"
 description = "common transformers used by the tidal personalization team."
 authors = [
     "Loay <loay@squareup.com>",
@@ -19,8 +8,9 @@ authors = [
     "Thomas <talmenningen@squareup.com>",
 ]
 
-license = "Apache License V 2.0"
+license = "Apache-2.0"
 readme = "README.md"
+homepage = "https://github.com/tidal-music/tidal-algorithmic-mixes"
 
 [tool.poetry.dependencies]
 python = ">=3.10.0"

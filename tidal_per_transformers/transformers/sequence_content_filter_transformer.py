@@ -55,30 +55,35 @@ class SequenceContentFilterTransformer(LoggableTransformer):
         self.schema = schema
 
     def _transform(self, dataset):
-        artists_set = set(self.get_cleaned_artists().toPandas()[c.ARTIST_ID].tolist())
+        artists_set = set(self.get_invalid_artists().toPandas()[c.ARTIST_ID].tolist())
         artists_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(artists_set)
 
-        tracks_set = set(self.get_cleaned_track_groups().toPandas()[c.TRACK_GROUP].tolist())
+        tracks_set = set(self.get_invalid_track_groups().toPandas()[c.TRACK_GROUP].tolist())
         tracks_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(tracks_set)
 
         @F.udf(returnType=self.schema)
         def filter_tracks(tracks):
-            return [t for t in tracks if t[c.ARTIST_ID] in artists_bc.value and t[c.TRACK_GROUP] in tracks_bc.value]
+            a_set = set(artists_bc.value)  # Ensure sets for faster lookups
+            t_set = set(tracks_bc.value)
+
+            return [
+                t for t in tracks
+                if t[c.ARTIST_ID] not in a_set and t[c.TRACK_GROUP] not in t_set
+            ]
 
         return (dataset
                 .withColumn(c.TRACKS, filter_tracks(c.TRACKS))
                 .where(F.size(c.TRACKS) > 0))  # Drop empty sequences
 
-    def get_cleaned_artists(self):
+    def get_invalid_artists(self):
         return ArtistFilterTransformer.apply_filters(self.artist_filters,
                                                      self.min_artist_streams,
                                                      self.min_artist_streamers,
                                                      self.remove_holiday_music,
                                                      self.remove_ambient_music,
-                                                     self.remove_children_music,
-                                                     artist_column_for_filter=c.ARTIST_ID).select(c.ARTIST_ID)
+                                                     self.remove_children_music).select(c.ARTIST_ID)
 
-    def get_cleaned_track_groups(self):
+    def get_invalid_track_groups(self):
         return TrackGroupFilterTransformer.apply_filters(self.track_filters,
                                                          self.min_track_streams,
                                                          self.min_track_streamers,
