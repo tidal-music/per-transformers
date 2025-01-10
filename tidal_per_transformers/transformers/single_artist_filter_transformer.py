@@ -42,7 +42,4 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
                                               self.remove_holiday_music,
                                               self.remove_ambient_music,
                                               self.remove_children_music)
-        return (dataset
-                .join(filtered_artists.withColumnRenamed(c.ARTIST_ID, c.ARTIST_ID),
-                      c.ARTIST_ID,
-                      how="left_anti"))
+        return dataset.join(filtered_artists, c.ARTIST_ID, how="left_anti")
