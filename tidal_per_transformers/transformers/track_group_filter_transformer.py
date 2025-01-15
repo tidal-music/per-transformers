@@ -46,26 +46,26 @@ class TrackGroupFilterTransformer(LoggableTransformer):
         return self.filter_tracks(dataset)
 
     def filter_tracks(self, tracks: DataFrame) -> DataFrame:
-        filtered_tracks = self.apply_filters(self.track_filters,
-                                             self.min_track_streams,
-                                             self.min_track_streamers,
-                                             self.min_track_duration,
-                                             self.max_track_duration,
-                                             self.remove_holiday_music,
-                                             self.remove_ambient_music,
-                                             self.remove_children_music)
+        filtered_tracks = self.apply_invalid_filters(self.track_filters,
+                                                     self.min_track_streams,
+                                                     self.min_track_streamers,
+                                                     self.min_track_duration,
+                                                     self.max_track_duration,
+                                                     self.remove_holiday_music,
+                                                     self.remove_ambient_music,
+                                                     self.remove_children_music)
 
         return tracks.join(filtered_tracks, c.TRACK_GROUP, how="left_anti")
 
     @staticmethod
-    def apply_filters(category_filters: DataFrame,
-                      stream_count: int,
-                      streamers_count: int,
-                      min_track_duration: int,
-                      max_track_duration: int,
-                      drop_holiday: bool,
-                      drop_ambient: bool,
-                      drop_children: bool):
+    def apply_invalid_filters(category_filters: DataFrame,
+                              stream_count: int,
+                              streamers_count: int,
+                              min_track_duration: int,
+                              max_track_duration: int,
+                              drop_holiday: bool,
+                              drop_ambient: bool,
+                              drop_children: bool):
         all_checks = category_filters.where((F.col(c.AVAILABLE) == False) |
                                             (F.col(c.NON_MUSIC) == 1) |
                                             (F.col(c.STREAM_COUNT) < stream_count) |
@@ -78,6 +78,27 @@ class TrackGroupFilterTransformer(LoggableTransformer):
                                                           drop_children=drop_children,
                                                           key=c.TRACK_GROUP).select(c.TRACK_GROUP)
         return all_checks.union(category_filters)
+
+    @staticmethod
+    def apply_valid_filters(category_filters: DataFrame,
+                            stream_count: int,
+                            streamers_count: int,
+                            min_track_duration: int,
+                            max_track_duration: int,
+                            drop_holiday: bool,
+                            drop_ambient: bool,
+                            drop_children: bool):
+        df = category_filters.where((F.col(c.AVAILABLE) == True) &
+                                    (F.col(c.NON_MUSIC) == 0) &
+                                    (F.col(c.STREAM_COUNT) >= stream_count) &
+                                    (F.col(c.STREAMERS_COUNT) >= streamers_count) &
+                                    F.col(c.DURATION).between(min_track_duration, max_track_duration)
+                                    )
+        return apply_valid_category_filters(dataframe=df,
+                                            drop_holiday=drop_holiday,
+                                            drop_ambient=drop_ambient,
+                                            drop_children=drop_children,
+                                            key=c.TRACK_GROUP).select(c.TRACK_GROUP)
 
 
 def apply_invalid_category_filters(dataframe: DataFrame,

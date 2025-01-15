@@ -19,9 +19,9 @@ class SequenceContentFilterTransformerTest(PySparkTest):
                                                     tracks=[Row(index=0,
                                                                 productId=1,
                                                                 title='S',
-                                                                trackGroup='96',
+                                                                trackGroup='95476336',
                                                                 albumId=1,
-                                                                artistId=1,
+                                                                artistId=27446,
                                                                 duration=183.0,
                                                                 masterBundle=6,
                                                                 audioQuality='LOSSLESS',
@@ -61,7 +61,6 @@ class SequenceContentFilterTransformerTest(PySparkTest):
                                                min_artist_streams=5_000,
                                                min_artist_streamers=1_000,
                                                ).transform(playlists)
-        res.collect()
 
         self.assertEqual(1, res.count())
 
