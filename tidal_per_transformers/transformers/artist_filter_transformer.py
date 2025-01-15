@@ -5,7 +5,8 @@ from pyspark.sql.dataframe import DataFrame
 
 import tidal_per_transformers.transformers.utils.constants as c
 from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
-from tidal_per_transformers.transformers.track_group_filter_transformer import apply_category_filters
+from tidal_per_transformers.transformers.track_group_filter_transformer import (apply_valid_category_filters,
+                                                                                apply_invalid_category_filters)
 
 
 class ArtistFilterTransformer(LoggableTransformer):
@@ -43,13 +44,13 @@ class ArtistFilterTransformer(LoggableTransformer):
         ...
 
     @staticmethod
-    def apply_filters(category_filters: DataFrame,
-                      stream_count: int,
-                      streamers_count: int,
-                      drop_holiday: bool,
-                      drop_ambient: bool,
-                      drop_children: bool) -> DataFrame:
-        """Applies filters given in a data frame
+    def apply_invalid_filters(category_filters: DataFrame,
+                              stream_count: int,
+                              streamers_count: int,
+                              drop_holiday: bool,
+                              drop_ambient: bool,
+                              drop_children: bool) -> DataFrame:
+        """Applies filters given in a data frame to get invalid artists
 
         :param category_filters:            dataframe containing filters
         :param stream_count:                min stream count
@@ -64,9 +65,37 @@ class ArtistFilterTransformer(LoggableTransformer):
                                             (F.col(c.STREAM_COUNT) < stream_count) |
                                             (F.col(c.STREAMERS_COUNT) < streamers_count)
                                             ).select(c.ARTIST_ID)
-        category_filters = apply_category_filters(dataframe=category_filters,
-                                                  drop_holiday=drop_holiday,
-                                                  drop_ambient=drop_ambient,
-                                                  drop_children=drop_children,
-                                                  key=c.ARTIST_ID).select(c.ARTIST_ID)
+        category_filters = apply_invalid_category_filters(dataframe=category_filters,
+                                                          drop_holiday=drop_holiday,
+                                                          drop_ambient=drop_ambient,
+                                                          drop_children=drop_children,
+                                                          key=c.ARTIST_ID).select(c.ARTIST_ID)
         return all_checks.union(category_filters)
+
+    @staticmethod
+    def apply_valid_filters(category_filters: DataFrame,
+                            stream_count: int,
+                            streamers_count: int,
+                            drop_holiday: bool,
+                            drop_ambient: bool,
+                            drop_children: bool) -> DataFrame:
+        """Applies filters given in a data frame to get valid artists
+
+        :param category_filters:            dataframe containing filters
+        :param stream_count:                min stream count
+        :param streamers_count:             min streamers count
+        :param drop_holiday:                flag to drop holiday
+        :param drop_ambient:                flag to drop ambient music
+        :param drop_children:               flag to drop children
+        :return:                            cleaned dataframe
+        """
+        df = category_filters.where((F.col(c.AVAILABLE) == True) &
+                                    (F.col(c.NON_MUSIC) == 0) &
+                                    (F.col(c.STREAM_COUNT) >= stream_count) &
+                                    (F.col(c.STREAMERS_COUNT) >= streamers_count)
+                                    )
+        return apply_valid_category_filters(dataframe=df,
+                                            drop_holiday=drop_holiday,
+                                            drop_ambient=drop_ambient,
+                                            drop_children=drop_children,
+                                            key=c.ARTIST_ID).select(c.ARTIST_ID)

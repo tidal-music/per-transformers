@@ -15,6 +15,7 @@ class SequenceContentFilterTransformer(LoggableTransformer):
     Transformer for applying content filters to columns with lists of tracks. This can e.g. be applied to the
     playlist track table containing a list of all the tracks in a playlist.
     """
+
     def __init__(self,
                  track_filters: DataFrame,
                  artist_filters: DataFrame,
@@ -55,40 +56,37 @@ class SequenceContentFilterTransformer(LoggableTransformer):
         self.schema = schema
 
     def _transform(self, dataset):
-        artists_set = set(self.get_invalid_artists().toPandas()[c.ARTIST_ID].tolist())
+        artists_set = set(self.get_valid_artists().toPandas()[c.ARTIST_ID].tolist())
         artists_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(artists_set)
 
-        tracks_set = set(self.get_invalid_track_groups().toPandas()[c.TRACK_GROUP].tolist())
+        tracks_set = set(self.get_valid_track_groups().toPandas()[c.TRACK_GROUP].tolist())
         tracks_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(tracks_set)
 
         @F.udf(returnType=self.schema)
         def filter_tracks(tracks):
-            a_set = set(artists_bc.value)  # Ensure sets for faster lookups
+            a_set = set(artists_bc.value)
             t_set = set(tracks_bc.value)
 
-            return [
-                t for t in tracks
-                if t[c.ARTIST_ID] not in a_set and t[c.TRACK_GROUP] not in t_set
-            ]
+            return [t for t in tracks if t[c.ARTIST_ID] in a_set and t[c.TRACK_GROUP] in t_set]
 
         return (dataset
                 .withColumn(c.TRACKS, filter_tracks(c.TRACKS))
                 .where(F.size(c.TRACKS) > 0))  # Drop empty sequences
 
-    def get_invalid_artists(self):
-        return ArtistFilterTransformer.apply_filters(self.artist_filters,
-                                                     self.min_artist_streams,
-                                                     self.min_artist_streamers,
-                                                     self.remove_holiday_music,
-                                                     self.remove_ambient_music,
-                                                     self.remove_children_music).select(c.ARTIST_ID)
+    def get_valid_artists(self):
+        return ArtistFilterTransformer.apply_valid_filters(self.artist_filters,
+                                                           self.min_artist_streams,
+                                                           self.min_artist_streamers,
+                                                           self.remove_holiday_music,
+                                                           self.remove_ambient_music,
+                                                           self.remove_children_music).select(c.ARTIST_ID)
 
-    def get_invalid_track_groups(self):
-        return TrackGroupFilterTransformer.apply_filters(self.track_filters,
-                                                         self.min_track_streams,
-                                                         self.min_track_streamers,
-                                                         self.min_track_duration,
-                                                         self.max_track_duration,
-                                                         self.remove_holiday_music,
-                                                         self.remove_ambient_music,
-                                                         self.remove_children_music).select(c.TRACK_GROUP)
+    def get_valid_track_groups(self):
+        return TrackGroupFilterTransformer.apply_valid_filters(self.track_filters,
+                                                               self.min_track_streams,
+                                                               self.min_track_streamers,
+                                                               self.min_track_duration,
+                                                               self.max_track_duration,
+                                                               self.remove_holiday_music,
+                                                               self.remove_ambient_music,
+                                                               self.remove_children_music).select(c.TRACK_GROUP)
