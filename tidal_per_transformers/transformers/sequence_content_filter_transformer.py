@@ -76,12 +76,12 @@ class SequenceContentFilterTransformer(LoggableTransformer):
                 .where(F.size(c.TRACKS) > 0))  # Drop empty sequences
 
     def get_invalid_artists(self):
-        return ArtistFilterTransformer.apply_filters(self.artist_filters,
-                                                     self.min_artist_streams,
-                                                     self.min_artist_streamers,
-                                                     self.remove_holiday_music,
-                                                     self.remove_ambient_music,
-                                                     self.remove_children_music).select(c.ARTIST_ID)
+        return ArtistFilterTransformer.apply_invalid_filters(self.artist_filters,
+                                                             self.min_artist_streams,
+                                                             self.min_artist_streamers,
+                                                             self.remove_holiday_music,
+                                                             self.remove_ambient_music,
+                                                             self.remove_children_music).select(c.ARTIST_ID)
 
     def get_invalid_track_groups(self):
         return TrackGroupFilterTransformer.apply_filters(self.track_filters,

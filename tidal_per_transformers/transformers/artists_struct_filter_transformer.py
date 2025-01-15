@@ -41,18 +41,18 @@ class ArtistsStructFilterTransformer(ArtistFilterTransformer):
         self.artist_column = artist_column
 
     def _transform(self, dataset):
-        cleaned_artists = self.apply_filters(self.artist_filters,
-                                             self.min_artist_streams,
-                                             self.min_artist_streamers,
-                                             self.remove_holiday_music,
-                                             self.remove_ambient_music,
-                                             self.remove_children_music)
-        artists_set = set(cleaned_artists.toPandas()[c.ARTIST_ID].tolist())
+        valid_artists = self.apply_valid_filters(self.artist_filters,
+                                                 self.min_artist_streams,
+                                                 self.min_artist_streamers,
+                                                 self.remove_holiday_music,
+                                                 self.remove_ambient_music,
+                                                 self.remove_children_music)
+        artists_set = set(valid_artists.toPandas()[c.ARTIST_ID].tolist())
         artists_set_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(artists_set)
 
         @F.udf(returnType=T.ArrayType(T.IntegerType()))
         def filter_artists(main_artists):
-            return [artist[c.ID] for artist in main_artists if artist[c.ID] not in artists_set_bc.value]
+            return [artist[c.ID] for artist in main_artists if artist[c.ID] in artists_set_bc.value]
 
         return (dataset
                 .withColumn(c.MATCHES, filter_artists(self.artist_column))

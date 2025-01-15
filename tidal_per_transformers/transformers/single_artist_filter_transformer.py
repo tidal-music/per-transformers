@@ -36,10 +36,10 @@ class SingleArtistFilterTransformer(ArtistFilterTransformer):
         self.min_artist_streams = min_artist_streams
 
     def _transform(self, dataset):
-        filtered_artists = self.apply_filters(self.artist_filters,
-                                              self.min_artist_streams,
-                                              self.min_artist_streamers,
-                                              self.remove_holiday_music,
-                                              self.remove_ambient_music,
-                                              self.remove_children_music)
+        filtered_artists = self.apply_invalid_filters(self.artist_filters,
+                                                      self.min_artist_streams,
+                                                      self.min_artist_streamers,
+                                                      self.remove_holiday_music,
+                                                      self.remove_ambient_music,
+                                                      self.remove_children_music)
         return dataset.join(filtered_artists, c.ARTIST_ID, how="left_anti")

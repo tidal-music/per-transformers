@@ -72,19 +72,19 @@ class TrackGroupFilterTransformer(LoggableTransformer):
                                             (F.col(c.STREAMERS_COUNT) < streamers_count) |
                                             ~F.col(c.DURATION).between(min_track_duration, max_track_duration)
                                             ).select(c.TRACK_GROUP)
-        category_filters = apply_category_filters(dataframe=category_filters,
-                                                  drop_holiday=drop_holiday,
-                                                  drop_ambient=drop_ambient,
-                                                  drop_children=drop_children,
-                                                  key=c.TRACK_GROUP).select(c.TRACK_GROUP)
+        category_filters = apply_invalid_category_filters(dataframe=category_filters,
+                                                          drop_holiday=drop_holiday,
+                                                          drop_ambient=drop_ambient,
+                                                          drop_children=drop_children,
+                                                          key=c.TRACK_GROUP).select(c.TRACK_GROUP)
         return all_checks.union(category_filters)
 
 
-def apply_category_filters(dataframe: DataFrame,
-                           drop_holiday: bool,
-                           drop_ambient: bool,
-                           drop_children: bool,
-                           key: str):
+def apply_invalid_category_filters(dataframe: DataFrame,
+                                   drop_holiday: bool,
+                                   drop_ambient: bool,
+                                   drop_children: bool,
+                                   key: str):
     dropped_dataframe = dataframe
     if drop_children:
         dropped_dataframe = dropped_dataframe.where(F.col(c.CHILDREN) == 0)
@@ -96,3 +96,20 @@ def apply_category_filters(dataframe: DataFrame,
         dropped_dataframe = dropped_dataframe.where(F.col(c.HOLIDAY) == 0)
 
     return dataframe.join(dropped_dataframe.select(key), key, "left_anti")
+
+
+def apply_valid_category_filters(dataframe: DataFrame,
+                                 drop_holiday: bool,
+                                 drop_ambient: bool,
+                                 drop_children: bool,
+                                 key: str):
+    if drop_children:
+        dataframe = dataframe.where(F.col(c.CHILDREN) == 0)
+
+    if drop_ambient:
+        dataframe = dataframe.where(F.col(c.AMBIENT) == 0)
+
+    if drop_holiday:
+        dataframe = dataframe.where(F.col(c.HOLIDAY) == 0)
+
+    return dataframe.select(key)

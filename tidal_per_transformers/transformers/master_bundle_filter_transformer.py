@@ -5,7 +5,7 @@ from pyspark.sql.dataframe import DataFrame
 
 import tidal_per_transformers.transformers.utils.constants as c
 from tidal_per_transformers.transformers.loggable_transformer import LoggableTransformer
-from tidal_per_transformers.transformers.track_group_filter_transformer import apply_category_filters
+from tidal_per_transformers.transformers.track_group_filter_transformer import apply_invalid_category_filters
 
 
 class MasterBundleFilterTransformer(LoggableTransformer):
@@ -88,11 +88,11 @@ class MasterBundleFilterTransformer(LoggableTransformer):
                                             ~F.col(c.ALBUM_TYPE).isin(album_types)
                                             ).select(c.MASTER_BUNDLE_ID)
 
-        category_filters = apply_category_filters(dataframe=category_filters,
-                                                  drop_holiday=drop_holiday,
-                                                  drop_ambient=drop_ambient,
-                                                  drop_children=drop_children,
-                                                  key=c.MASTER_BUNDLE_ID).select(c.MASTER_BUNDLE_ID)
+        category_filters = apply_invalid_category_filters(dataframe=category_filters,
+                                                          drop_holiday=drop_holiday,
+                                                          drop_ambient=drop_ambient,
+                                                          drop_children=drop_children,
+                                                          key=c.MASTER_BUNDLE_ID).select(c.MASTER_BUNDLE_ID)
 
         return (all_checks.union(category_filters).union(variant_albums) if drop_variant_versions
                 else all_checks.union(category_filters))
