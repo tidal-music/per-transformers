@@ -17,7 +17,6 @@ class FilterInfrequentSeqItemsTransformer(LoggableTransformer):
                  sequence_schema: DataType):
         """
         Filter out less frequent tracks from each playlist
-
         :param min_item_frequency:      Minimum number of sequences containing the item
         :param sequence_column:         Column name of the sequence, e.g., "tracks"
         :param item_column:             Column name of item field in the sequence (assume tracks are structs)
@@ -32,6 +31,7 @@ class FilterInfrequentSeqItemsTransformer(LoggableTransformer):
         self.sequence_schema = sequence_schema
 
     def _transform(self, dataset):
+        dataset = dataset.persist()  # Persist as we call it twice
         explode_col = f"{self.sequence_column}.{self.item_column}" if self.item_column else self.sequence_column
 
         items = (dataset
@@ -43,11 +43,12 @@ class FilterInfrequentSeqItemsTransformer(LoggableTransformer):
 
         items_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(set(items))
 
-        @F.udf(returnType=self.sequence_schema)
+        # noinspection PyArgumentList
+        @F.pandas_udf(returnType=self.sequence_schema)
         def filter_tracks(sequence):
             if self.item_column:
-                return [item for item in sequence if item[self.item_column] in items_bc.value]
+                return sequence.apply(lambda seq: [item for item in seq if item[self.item_column] in items_bc.value])
             else:
-                return [item for item in sequence if item in items_bc.value]
+                return sequence.apply(lambda seq: [item for item in seq if item in items_bc.value])
 
         return dataset.withColumn(self.sequence_column, filter_tracks(self.sequence_column))
