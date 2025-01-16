@@ -62,12 +62,13 @@ class SequenceContentFilterTransformer(LoggableTransformer):
         tracks_set = set(self.get_valid_track_groups().toPandas()[c.TRACK_GROUP].tolist())
         tracks_bc = dataset.sql_ctx.sparkSession.sparkContext.broadcast(tracks_set)
 
-        @F.udf(returnType=self.schema)
+        # noinspection PyArgumentList
+        @F.pandas_udf(returnType=self.schema)
         def filter_tracks(tracks):
-            a_set = set(artists_bc.value)
-            t_set = set(tracks_bc.value)
-
-            return [t for t in tracks if t[c.ARTIST_ID] in a_set and t[c.TRACK_GROUP] in t_set]
+            filtered_tracks = tracks.apply(
+                lambda x: [t for t in x if t[c.ARTIST_ID] in artists_bc.value and t[c.TRACK_GROUP] in tracks_bc.value]
+            )
+            return filtered_tracks
 
         return (dataset
                 .withColumn(c.TRACKS, filter_tracks(c.TRACKS))
