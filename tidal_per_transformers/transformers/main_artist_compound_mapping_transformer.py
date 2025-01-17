@@ -2,7 +2,7 @@ from pyspark.ml.base import Transformer
 from pyspark.sql import functions as F, DataFrame
 
 import tidal_per_transformers.transformers.utils.constants as c
-from tidal_per_transformers.transformers.utils import get_top_items
+from tidal_per_transformers.transformers.utils.spark_utils import get_top_items
 
 
 class MainArtistCompoundMappingTransformer(Transformer):
