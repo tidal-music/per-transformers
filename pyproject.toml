@@ -17,7 +17,6 @@ python = ">=3.10.0"
 pyspark = ">=3.5.0"
 numpy = "^1.23.0"
 pandas = ">=1.4.2"
-great-expectations = "0.16.15"
 alphabet-detector = "0.0.7"
 
 [tool.poetry.group.dev.dependencies]
