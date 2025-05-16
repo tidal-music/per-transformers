@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tidal_per_transformers"
-version = "0.4.4"
+version = "0.4.5"
 description = "common transformers used by the tidal personalization team."
 authors = [
     "Loay <loay@squareup.com>",
@@ -16,20 +16,13 @@ homepage = "https://github.com/tidal-music/tidal-algorithmic-mixes"
 python = ">=3.10.0"
 pyspark = ">=3.5.0"
 numpy = "^1.23.0"
-pandas = ">=1.4.2"
-great-expectations = "0.16.15"
-scikit-learn = "1.4.0"
-alphabet-detector = "0.0.7"
+pandas = "^1.4.2"
 pyarrow = ">=8.0.0"
+alphabet-detector = "0.0.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.0.2"
-coverage = ">=4.5.2"
-pytest-cov = ">=4.1.0"
-coveralls = ">=1.6.0"
-mock = ">=2.0.0"
-moto = ">=3.1.11"
-setuptools  = ">=69.1.1"
+setuptools = "80.4.0"
 
 [build-system]
 requires = ["poetry-core"]
