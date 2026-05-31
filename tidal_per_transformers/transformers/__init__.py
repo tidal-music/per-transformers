@@ -1,6 +1,7 @@
 from .loggable_transformer import LoggableTransformer
 from .aggregate_transformer import AggregateTransformer
 from .artist_compound_transformer import ArtistCompoundMappingTransformer
+from .artist_content_consistency_scorer import ArtistContentConsistencyScorer
 from .artist_filter_transformer import ArtistFilterTransformer
 from .artists_struct_filter_transformer import ArtistsStructFilterTransformer
 from .blazingtext_input_format_transformer import BlazingTextInputFormatTransformer
